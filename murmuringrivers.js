@@ -5,16 +5,18 @@ if (Meteor.isClient) {
 
   Template.hello.events({
     'click input': function () {
-      // template data, if any, is available in 'this'
-      if (typeof console !== 'undefined')
-        console.log("You pressed the button");
+      Meteor.call('pushFirebase', 'D-D-D-DROP THE BASE !');
     }
   });
 }
 
 if (Meteor.isServer) {
-  Meteor.startup(function () {
-    var fb = new Firebase("https://DATABASEONFIRE.firebaseio.com/");
-
+  Meteor.methods({
+    'pushFirebase': function(string){
+      fb.push({name: string});
+    }
   });
 }
+Router.map(function() {
+  this.route('hello', {path: '/'});
+});
