@@ -148,12 +148,17 @@ input[type=button]
 			text-align: center
 			background: #7676c9
 			+transition(all, 400ms, ease)
-			&:hover
-				background: #53538f
 			&:first-child
 				float: left
+				&:hover
+					background: seagreen 
 			&:nth-child(2)
-				float: right 
+				float: right
+				&:hover
+					background: indianred
+			&:focus
+				border: none
+				outline: none
 
 @media screen and (max-width: 500px)
 	header

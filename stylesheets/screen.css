@@ -314,40 +314,49 @@ input[type=button]:hover {
   transition-timing-function: ease;
 }
 /* line 151, ../sass/screen.sass */
-.tweetContainer .tweet button:hover {
-  background: #53538f;
-}
-/* line 153, ../sass/screen.sass */
 .tweetContainer .tweet button:first-child {
   float: left;
+}
+/* line 153, ../sass/screen.sass */
+.tweetContainer .tweet button:first-child:hover {
+  background: seagreen;
 }
 /* line 155, ../sass/screen.sass */
 .tweetContainer .tweet button:nth-child(2) {
   float: right;
 }
+/* line 157, ../sass/screen.sass */
+.tweetContainer .tweet button:nth-child(2):hover {
+  background: indianred;
+}
+/* line 159, ../sass/screen.sass */
+.tweetContainer .tweet button:focus {
+  border: none;
+  outline: none;
+}
 
 @media screen and (max-width: 500px) {
-  /* line 160, ../sass/screen.sass */
+  /* line 165, ../sass/screen.sass */
   header h1 {
     font-size: 1.7em;
   }
 
-  /* line 162, ../sass/screen.sass */
+  /* line 167, ../sass/screen.sass */
   .form {
     width: 295px;
   }
 
-  /* line 164, ../sass/screen.sass */
+  /* line 169, ../sass/screen.sass */
   input {
     width: 275px;
   }
 
-  /* line 166, ../sass/screen.sass */
+  /* line 171, ../sass/screen.sass */
   .tweetContainer {
     width: 275px;
     min-width: 275px;
   }
-  /* line 170, ../sass/screen.sass */
+  /* line 175, ../sass/screen.sass */
   .tweetContainer .tweet button {
     width: 100px;
   }

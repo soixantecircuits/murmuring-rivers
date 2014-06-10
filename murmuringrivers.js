@@ -6,6 +6,13 @@ if (Meteor.isClient) {
   Template.hello.rendered = function(){
     var pin = Router.current().data().pin;
     Session.set('pin', pin);
+    $(document).on('click', '#validate', function() {
+      Meteor.call('pushFirebase', Session.get('pin'), tweet);
+      Meteor.call('addTweet');
+    });
+    $(document).on('click', '#delete', function() {
+      Meteor.call('addTweet');
+    });
   }
 
 Template.hello.events({
@@ -26,7 +33,7 @@ Template.hello.events({
           });
         }
       }
-    }, 
+    },
     'keypress #hashtag': function(evt){
       if (evt.keyCode === 13) {
         if($('#hashtag').val()!==''){
@@ -47,15 +54,6 @@ Template.hello.events({
         }
       }
     },
-    'click #ok': function(){
-      console.log("salut");
-      Meteor.call('pushFirebase', Session.get('pin'), tweet);
-      Meteor.call('addTweet');
-    }, 
-    'click #not': function(){
-      console.log("tijuana");
-      Meteor.call('addTweet');
-    }
 });
   Meteor.methods({
     'addTweet': function(){
@@ -66,7 +64,7 @@ Template.hello.events({
         date: tweetsData.statuses[tweetCount].created_at
     };
     $('.tweet').remove();
-    $('.tweetContainer').append('<div class="tweet"><img src="'+tweet.profile_picture+'"><strong>'+tweet.username+'</strong><p class="text">'+tweet.text+'</p><p class="date">'+tweet.date+'</p><div class="btn-holder"><button id="ok">Validate</button><button id="not">Delete</button><div class="clearfix"></div></div></div>');
+    $('.tweetContainer').append('<div class="tweet"><img src="'+tweet.profile_picture+'"><strong>'+tweet.username+'</strong><p class="text">'+tweet.text+'</p><p class="date">'+tweet.date+'</p><div class="btn-holder"><button id="validate">Validate</button><button id="delete">Delete</button><div class="clearfix"></div></div></div>');
     tweetCount++;
     if(tweetCount==98){
         Meteor.call('getTweet', Session.get("hashtag"), function(error, data){
