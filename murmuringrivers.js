@@ -5,18 +5,40 @@ if (Meteor.isClient) {
 
   Template.hello.events({
     'click input': function () {
-      Meteor.call('pushFirebase', 'D-D-D-DROP THE BASE !');
+      var consonants = 'bcdfghjklmnpqrstvwxyz',
+          vowels = 'aeiou',
+          rand = function(limit) {
+              return Math.floor(Math.random()*limit);
+          },
+          i, word='', length = parseInt(7,10),
+          consonants = consonants.split(''),
+          vowels = vowels.split('');
+      for (i=0;i<length/2;i++) {
+          var randConsonant = consonants[rand(consonants.length)],
+              randVowel = vowels[rand(vowels.length)];
+          word += (i===0) ? randConsonant.toUpperCase() : randConsonant;
+          word += i*2<length-1 ? randVowel : '';
+      }
+      var pin = Router.current().data().pin;
+      Meteor.call('pushFirebase',pin, word);
     }
   });
 }
 
 if (Meteor.isServer) {
   Meteor.methods({
-    'pushFirebase': function(string){
+    'pushFirebase': function(pin, string){
+      fb = new Firebase(url+pin);
       fb.push({name: string});
     }
   });
 }
+
 Router.map(function() {
-  this.route('hello', {path: '/'});
+  this.route('hello', {
+    path: '/:pin',
+    data: function(){
+     return {pin : this.params.pin};
+    }
+  });
 });
