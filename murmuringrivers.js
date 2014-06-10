@@ -21,6 +21,7 @@ Template.hello.events({
         if(tweetCount==0 || Session.get("hashtag")!==$('#hashtag').val()){
           Session.set("hashtag", $('#hashtag').val());
           $('.form').after('<p class="loading">Wait before loading</p>');
+          $('.tweetContainer').remove();
           Meteor.call('getTweet', Session.get("hashtag"), function(error, data){
             if(error)
               console.log(error);
@@ -40,6 +41,7 @@ Template.hello.events({
           if(tweetCount==0 || Session.get("hashtag")!==$('#hashtag').val()){
             Session.set("hashtag", $('#hashtag').val());
             $('.form').after('<p class="loading">Wait before loading</p>');
+            $('.tweetContainer').remove();
             Meteor.call('getTweet', Session.get("hashtag"), function(error, data){
               if(error)
                 console.log(error);
