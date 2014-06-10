@@ -18,6 +18,7 @@ Template.hello.events({
         else{
             tweetsData=data;
         }
+        $('.form').after('<section class="tweetContainer"></section>');
         Meteor.call('addTweet');
     });
     }

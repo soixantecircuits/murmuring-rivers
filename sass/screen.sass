@@ -24,6 +24,7 @@
 /* Variables */
 $darkgrey: #32333a
 $formWidth: 375px
+
 // Basic CSS
 body
 	font-family: "Lato"
@@ -44,7 +45,7 @@ header
 		a
 			font-weight: 700
 			color: #7676c9
-form
+.form
 	width: $formWidth+20
 	display: block
 	margin: 0 auto 40px
@@ -148,3 +149,18 @@ input[type=button]
 				float: left
 			&:nth-child(2)
 				float: right 
+
+@media screen and (max-width: 500px)
+	header
+		h1
+			font-size: 1.7em
+	.form
+		width: 295px
+	input
+		width: 275px
+	.tweetContainer
+		width: 275px
+		min-width: 275px
+		.tweet
+			button
+				width: 100px
