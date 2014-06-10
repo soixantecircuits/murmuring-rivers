@@ -1,8 +1,4 @@
 if (Meteor.isClient) {
-  Template.hello.greeting = function () {
-    return "Welcome to murmuringrivers.";
-  };
-
   var tweetCount =0,
       tweetsData,
       tweet;
@@ -28,7 +24,7 @@ if (Meteor.isClient) {
               date: tweetsData.statuses[tweetCount].created_at
             };
             $('.tweet').remove();
-            $('.tweetContainer').append('<div class="tweet"><img src="'+tweet.profile_picture+'"><p>'+tweet.username+' a tweeté ceci:</p><p>'+tweet.text+'</p><p>'+tweet.date+'</p><button id="ok">Validate</button><button id="not">Delete</button></div>');
+            $('.tweetContainer').append('<div class="tweet"><img src="'+tweet.profile_picture+'"><strong>'+tweet.username+'</strong><p class="text">'+tweet.text+'</p><p class="date">'+tweet.date+'</p><div class="btn-holder"><button id="ok">Validate</button><button id="not">Delete</button><div class="clearfix"></div></div></div>');
             tweetCount++;
           }
         });
@@ -43,7 +39,7 @@ if (Meteor.isClient) {
           date: tweetsData.statuses[tweetCount].created_at
         };
         $('.tweet').remove();
-        $('.tweetContainer').append('<div class="tweet"><img src="'+tweet.profile_picture+'"><p>'+tweet.username+' a tweeté ceci:</p><p>'+tweet.text+'</p><p>'+tweet.date+'</p><button id="ok">Validate</button><button id="not">Delete</button></div>');
+        $('.tweetContainer').append('<div class="tweet"><img src="'+tweet.profile_picture+'"><p>'+tweet.username+'</p><p>'+tweet.text+'</p><p>'+tweet.date+'</p><button id="ok">Validate</button><button id="not">Delete</button></div>');
         tweetCount++;
         if(tweetCount==98){
           Meteor.call('getTweet', Session.get("hashtag"), function(error, data){
@@ -64,7 +60,7 @@ if (Meteor.isClient) {
           date: tweetsData.statuses[tweetCount].created_at
         };
         $('.tweet').remove();
-        $('.tweetContainer').append('<div class="tweet"><img src="'+tweet.profile_picture+'"><p>'+tweet.username+' a tweeté ceci:</p><p>'+tweet.text+'</p><p>'+tweet.date+'</p><button id="ok">Validate</button><button id="not">Delete</button></div>');
+        $('.tweetContainer').append('<div class="tweet"><img src="'+tweet.profile_picture+'"><p>'+tweet.username+'</p><p>'+tweet.text+'</p><p>'+tweet.date+'</p><button id="ok">Validate</button><button id="not">Delete</button></div>');
         tweetCount++;
         if(tweetCount==98){
           Meteor.call('getTweet', Session.get("hashtag"), function(error, data){
@@ -87,7 +83,6 @@ if (Meteor.isServer) {
       fb.push({tweet: object});
     },
     'getTweet': function(hashtag){
-      console.log(hashtag);
       var fut = new Future();
       if(hashtag.charAt(0)!=="#"){
         hashtag = "#"+hashtag;

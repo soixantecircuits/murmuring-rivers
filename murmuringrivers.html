@@ -1,5 +1,5 @@
 <head>
-  <title>murmuringrivers</title>
+  <title>Murmuring Rivers</title>
 </head>
 
 <body>
@@ -7,9 +7,19 @@
 </body>
 
 <template name="hello">
-  <h1>Twitter is on fire !</h1>
-  {{greeting}}
-  <input type="text" id="hashtag" placeholder="#hashtag">
-  <input type="button" id="newTweet" value="Give me some TWEETS" />
-  <hr class="tweetContainer">
+	<header>
+		<h1>Twitter is on fire !</h1>
+		<p>Welcome to Murmuring Rivers. A cousin of <a href="http://ramsey.io" target="_blank">Ramsey</a></p>
+	</header>
+  <br>
+
+<form>
+	<div class="input-container">
+		<input type="text" id="hashtag" placeholder="#hashtag">
+		<div class="befText"></div>
+	</div>
+	<input type="button" id="newTweet" value="Tweet flow" />
+</form>
+
+<section class="tweetContainer"></section>
 </template>

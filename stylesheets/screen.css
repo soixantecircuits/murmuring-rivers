@@ -1,0 +1,306 @@
+@import url("http://fonts.googleapis.com/css?family=Lato:400,700,900");
+/* line 17, ../../../../../var/lib/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../var/lib/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../var/lib/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../var/lib/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../var/lib/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../var/lib/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../var/lib/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../var/lib/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../var/lib/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* Mixins */
+/* line 18, ../sass/screen.sass */
+.clearfix:after {
+  content: ".";
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+/* Variables */
+/* line 28, ../sass/screen.sass */
+body {
+  font-family: "Lato";
+}
+
+/* line 30, ../sass/screen.sass */
+a, a:visited {
+  text-decoration: none;
+  color: #32333a;
+}
+
+/* line 34, ../sass/screen.sass */
+header {
+  text-align: center;
+  margin: 20px 0 40px;
+}
+/* line 37, ../sass/screen.sass */
+header h1 {
+  font-size: 3em;
+  color: #53538f;
+  margin-bottom: 20px;
+}
+/* line 41, ../sass/screen.sass */
+header p {
+  font-size: 1em;
+  color: #32333a;
+}
+/* line 44, ../sass/screen.sass */
+header p a {
+  font-weight: 700;
+  color: #7676c9;
+}
+
+/* line 47, ../sass/screen.sass */
+form {
+  width: 395px;
+  display: block;
+  margin: 0 auto 40px;
+}
+
+/* line 51, ../sass/screen.sass */
+input {
+  position: relative;
+  display: block;
+  border: 1px solid #292a30;
+  -webkit-border-radius: 3px 3px;
+  -moz-border-radius: 3px / 3px;
+  border-radius: 3px / 3px;
+  width: 375px;
+  height: 38px;
+  max-width: 372px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  line-height: 30px;
+  color: #777777;
+  font-size: 13px;
+  z-index: 1;
+}
+/* line 65, ../sass/screen.sass */
+input:focus {
+  outline: none;
+}
+/* line 67, ../sass/screen.sass */
+input:focus + .befText {
+  background: #53538f;
+}
+
+/* line 69, ../sass/screen.sass */
+input[type=button] {
+  position: relative;
+  -webkit-border-radius: 1px 1px;
+  -moz-border-radius: 1px / 1px;
+  border-radius: 1px / 1px;
+  width: 138px;
+  height: 36px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 36px;
+  font-size: 13px;
+  color: #fafafa;
+  font-weight: 700;
+  text-align: center;
+  background: #7676c9;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 400ms;
+  -moz-transition-duration: 400ms;
+  -o-transition-duration: 400ms;
+  transition-duration: 400ms;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+}
+/* line 87, ../sass/screen.sass */
+input[type=button]:hover {
+  background: #53538f;
+}
+
+/* line 89, ../sass/screen.sass */
+.input-container {
+  position: relative;
+}
+
+/* line 92, ../sass/screen.sass */
+.befText {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  display: block;
+  height: 36px;
+  width: 4px;
+  background: #7676c8;
+  z-index: 2;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 400ms;
+  -moz-transition-duration: 400ms;
+  -o-transition-duration: 400ms;
+  transition-duration: 400ms;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+}
+
+/* line 103, ../sass/screen.sass */
+.tweetContainer {
+  width: 375px;
+  min-width: 375px;
+  margin: auto;
+  border: 2px solid #53538f;
+  -webkit-border-radius: 1px 1px;
+  -moz-border-radius: 1px / 1px;
+  border-radius: 1px / 1px;
+  padding: 10px;
+}
+/* line 110, ../sass/screen.sass */
+.tweetContainer .tweet {
+  color: #777777;
+  font-size: 1em;
+}
+/* line 113, ../sass/screen.sass */
+.tweetContainer .tweet strong {
+  display: inline-block;
+  margin-left: 10px;
+  font-weight: 700;
+  color: #32333a;
+  font-size: 1.5em;
+}
+/* line 119, ../sass/screen.sass */
+.tweetContainer .tweet img {
+  display: inline-block;
+}
+/* line 121, ../sass/screen.sass */
+.tweetContainer .tweet .text {
+  margin: 10px 0;
+}
+/* line 123, ../sass/screen.sass */
+.tweetContainer .tweet .date {
+  font-size: 0.7em;
+}
+/* line 125, ../sass/screen.sass */
+.tweetContainer .tweet .btn-holder {
+  margin-top: 10px;
+}
+/* line 127, ../sass/screen.sass */
+.tweetContainer .tweet button {
+  position: relative;
+  -webkit-border-radius: 1px 1px;
+  -moz-border-radius: 1px / 1px;
+  border-radius: 1px / 1px;
+  width: 138px;
+  height: 36px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  margin: auto;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 36px;
+  font-size: 13px;
+  color: #fafafa;
+  font-weight: 700;
+  text-align: center;
+  background: #7676c9;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 400ms;
+  -moz-transition-duration: 400ms;
+  -o-transition-duration: 400ms;
+  transition-duration: 400ms;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+}
+/* line 145, ../sass/screen.sass */
+.tweetContainer .tweet button:hover {
+  background: #53538f;
+}
+/* line 147, ../sass/screen.sass */
+.tweetContainer .tweet button:first-child {
+  float: left;
+}
+/* line 149, ../sass/screen.sass */
+.tweetContainer .tweet button:nth-child(2) {
+  float: right;
+}
