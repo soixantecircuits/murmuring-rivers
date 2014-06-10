@@ -109,7 +109,10 @@ input[type=button]
 .tweetContainer
 	width: $formWidth
 	min-width: $formWidth
+	height: 200px
+	min-height: 200px
 	margin: auto
+	position: relative
 	border: 2px solid #53538f
 	+border-radius(1px, 1px)
 	padding: 10px
@@ -130,6 +133,9 @@ input[type=button]
 			font-size: 0.7em
 		.btn-holder
 			margin-top: 10px
+			position: absolute
+			bottom: 10px
+			width: $formWidth
 		button
 			position: relative
 			+border-radius(1px, 1px)
@@ -174,3 +180,5 @@ input[type=button]
 		.tweet
 			button
 				width: 100px
+			.btn-holder
+				width: 275px
