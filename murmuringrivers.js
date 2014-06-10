@@ -6,30 +6,56 @@ if (Meteor.isClient) {
   Template.hello.rendered = function(){
     var pin = Router.current().data().pin;
     Session.set('pin', pin);
-}
+  }
 
 Template.hello.events({
     'click #newTweet': function () {
-      if(tweetCount==0 || Session.get("hashtag")!==$('#hashtag').val()){
-        Session.set("hashtag", $('#hashtag').val());
-        Meteor.call('getTweet', Session.get("hashtag"), function(error, data){
-          if(error)
-            console.log(error);
-        else{
-            tweetsData=data;
+      if($('#hashtag').val()!==''){
+        if(tweetCount==0 || Session.get("hashtag")!==$('#hashtag').val()){
+          Session.set("hashtag", $('#hashtag').val());
+          $('.form').after('<p class="loading">Wait before loading</p>');
+          Meteor.call('getTweet', Session.get("hashtag"), function(error, data){
+            if(error)
+              console.log(error);
+          else{
+              tweetsData=data;
+          }
+          $('.loading').remove();
+          $('.form').after('<section class="tweetContainer"></section>');
+          Meteor.call('addTweet');
+          });
         }
-        $('.form').after('<section class="tweetContainer"></section>');
-        Meteor.call('addTweet');
-    });
+      }
+    }, 
+    'keypress #hashtag': function(evt){
+      if (evt.keyCode === 13) {
+        if($('#hashtag').val()!==''){
+          if(tweetCount==0 || Session.get("hashtag")!==$('#hashtag').val()){
+            Session.set("hashtag", $('#hashtag').val());
+            $('.form').after('<p class="loading">Wait before loading</p>');
+            Meteor.call('getTweet', Session.get("hashtag"), function(error, data){
+              if(error)
+                console.log(error);
+            else{
+                tweetsData=data;
+            }
+            $('.loading').remove();
+            $('.form').after('<section class="tweetContainer"></section>');
+            Meteor.call('addTweet');
+            });
+          }
+        }
+      }
+    },
+    'click #ok': function(){
+      console.log("salut");
+      Meteor.call('pushFirebase', Session.get('pin'), tweet);
+      Meteor.call('addTweet');
+    }, 
+    'click #not': function(){
+      console.log("tijuana");
+      Meteor.call('addTweet');
     }
-}, 
-'click #ok': function(){
-  Meteor.call('pushFirebase', Session.get('pin'), tweet);
-  Meteor.call('addTweet');
-}, 
-'click #not': function(){
-  Meteor.call('addTweet');
-}
 });
   Meteor.methods({
     'addTweet': function(){

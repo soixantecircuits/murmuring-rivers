@@ -105,18 +105,34 @@ header p {
 /* line 45, ../sass/screen.sass */
 header p a {
   font-weight: 700;
+  color: #32333a;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 400ms;
+  -moz-transition-duration: 400ms;
+  -o-transition-duration: 400ms;
+  transition-duration: 400ms;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+}
+/* line 49, ../sass/screen.sass */
+header p a:hover {
   color: #7676c9;
 }
 
-/* line 48, ../sass/screen.sass */
+/* line 51, ../sass/screen.sass */
 .form {
   width: 395px;
   display: block;
   margin: 0 auto 40px;
 }
 
-/* line 52, ../sass/screen.sass */
-input {
+/* line 55, ../sass/screen.sass */
+input[type=text] {
   position: relative;
   display: block;
   border: 1px solid #292a30;
@@ -133,16 +149,16 @@ input {
   font-size: 13px;
   z-index: 1;
 }
-/* line 66, ../sass/screen.sass */
-input:focus {
+/* line 69, ../sass/screen.sass */
+input[type=text]:focus {
   outline: none;
 }
-/* line 68, ../sass/screen.sass */
-input:focus + .befText {
+/* line 71, ../sass/screen.sass */
+input[type=text]:focus + .befText {
   background: #53538f;
 }
 
-/* line 70, ../sass/screen.sass */
+/* line 73, ../sass/screen.sass */
 input[type=button] {
   position: relative;
   -webkit-border-radius: 1px 1px;
@@ -180,17 +196,17 @@ input[type=button] {
   -o-transition-timing-function: ease;
   transition-timing-function: ease;
 }
-/* line 88, ../sass/screen.sass */
+/* line 91, ../sass/screen.sass */
 input[type=button]:hover {
   background: #53538f;
 }
 
-/* line 90, ../sass/screen.sass */
+/* line 93, ../sass/screen.sass */
 .input-container {
   position: relative;
 }
 
-/* line 93, ../sass/screen.sass */
+/* line 96, ../sass/screen.sass */
 .befText {
   position: absolute;
   top: 3px;
@@ -214,7 +230,12 @@ input[type=button]:hover {
   transition-timing-function: ease;
 }
 
-/* line 104, ../sass/screen.sass */
+/* line 107, ../sass/screen.sass */
+.loading {
+  text-align: center;
+}
+
+/* line 109, ../sass/screen.sass */
 .tweetContainer {
   width: 375px;
   min-width: 375px;
@@ -225,12 +246,12 @@ input[type=button]:hover {
   border-radius: 1px / 1px;
   padding: 10px;
 }
-/* line 111, ../sass/screen.sass */
+/* line 116, ../sass/screen.sass */
 .tweetContainer .tweet {
   color: #777777;
   font-size: 1em;
 }
-/* line 114, ../sass/screen.sass */
+/* line 119, ../sass/screen.sass */
 .tweetContainer .tweet strong {
   display: inline-block;
   margin-left: 10px;
@@ -238,23 +259,23 @@ input[type=button]:hover {
   color: #32333a;
   font-size: 1.5em;
 }
-/* line 120, ../sass/screen.sass */
+/* line 125, ../sass/screen.sass */
 .tweetContainer .tweet img {
   display: inline-block;
 }
-/* line 122, ../sass/screen.sass */
+/* line 127, ../sass/screen.sass */
 .tweetContainer .tweet .text {
   margin: 10px 0;
 }
-/* line 124, ../sass/screen.sass */
+/* line 129, ../sass/screen.sass */
 .tweetContainer .tweet .date {
   font-size: 0.7em;
 }
-/* line 126, ../sass/screen.sass */
+/* line 131, ../sass/screen.sass */
 .tweetContainer .tweet .btn-holder {
   margin-top: 10px;
 }
-/* line 128, ../sass/screen.sass */
+/* line 133, ../sass/screen.sass */
 .tweetContainer .tweet button {
   position: relative;
   -webkit-border-radius: 1px 1px;
@@ -292,41 +313,41 @@ input[type=button]:hover {
   -o-transition-timing-function: ease;
   transition-timing-function: ease;
 }
-/* line 146, ../sass/screen.sass */
+/* line 151, ../sass/screen.sass */
 .tweetContainer .tweet button:hover {
   background: #53538f;
 }
-/* line 148, ../sass/screen.sass */
+/* line 153, ../sass/screen.sass */
 .tweetContainer .tweet button:first-child {
   float: left;
 }
-/* line 150, ../sass/screen.sass */
+/* line 155, ../sass/screen.sass */
 .tweetContainer .tweet button:nth-child(2) {
   float: right;
 }
 
 @media screen and (max-width: 500px) {
-  /* line 155, ../sass/screen.sass */
+  /* line 160, ../sass/screen.sass */
   header h1 {
     font-size: 1.7em;
   }
 
-  /* line 157, ../sass/screen.sass */
+  /* line 162, ../sass/screen.sass */
   .form {
     width: 295px;
   }
 
-  /* line 159, ../sass/screen.sass */
+  /* line 164, ../sass/screen.sass */
   input {
     width: 275px;
   }
 
-  /* line 161, ../sass/screen.sass */
+  /* line 166, ../sass/screen.sass */
   .tweetContainer {
     width: 275px;
     min-width: 275px;
   }
-  /* line 165, ../sass/screen.sass */
+  /* line 170, ../sass/screen.sass */
   .tweetContainer .tweet button {
     width: 100px;
   }

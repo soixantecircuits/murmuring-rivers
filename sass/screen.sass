@@ -44,12 +44,15 @@ header
 		color: $darkgrey
 		a
 			font-weight: 700
-			color: #7676c9
+			color: $darkgrey
+			+transition(all, 400ms, ease)
+			&:hover
+				color: #7676c9
 .form
 	width: $formWidth+20
 	display: block
 	margin: 0 auto 40px
-input
+input[type=text]
 	position: relative
 	display: block
 	border: 1px solid #292a30
@@ -101,6 +104,8 @@ input[type=button]
 	z-index: 2
 	+transition(all, 400ms, ease)
 
+.loading
+	text-align: center
 .tweetContainer
 	width: $formWidth
 	min-width: $formWidth
