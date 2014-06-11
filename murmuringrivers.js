@@ -62,6 +62,10 @@ Template.hello.events({
     var pin = $('#pin').val();
     if(pin.length==4){
       Router.go('search', {pin: pin});
+    } else {
+      $('#pin').css({
+        border: '1px solid indianred'
+      });
     }
   }
 });
