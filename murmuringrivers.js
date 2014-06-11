@@ -3,6 +3,10 @@ if (Meteor.isClient) {
   tweetsData,
   tweet;
 
+  Template.search.pin = function(){
+    return Router.current().data().pin;
+  }
+
   Template.search.rendered = function(){
     var pin = Router.current().data().pin;
     Session.set('pin', pin);
@@ -61,11 +65,20 @@ Template.hello.events({
   'click #checkPin': function(){
     var pin = $('#pin').val();
     if(pin.length==4){
-      Router.go('search', {pin: pin});
-    } else {
-      $('#pin').css({
-        border: '1px solid indianred'
+      $('#pin').css({border: '1px solid #292a30'});
+      Meteor.call('checkFirebase', pin, function(error, data){
+        if(data)
+          Router.go('search', {pin: pin});
+        else {
+          $('#pin').css({border: '1px solid indianred'});
+          $('#state').remove();
+          $('#checkPin').after('<p id="state">Votre pin est invalide</p>');
+        }
       });
+    } else {
+      $('#pin').css({border: '1px solid indianred'});
+      $('#state').remove();
+      $('#checkPin').after('<p id="state">Votre pin est invalide</p>');
     }
   }
 });
@@ -109,6 +122,17 @@ if (Meteor.isServer) {
       }
       T.get('search/tweets', { q: hashtag, count: 100, result_type: "recent"}, function(err, data, response) {
           fut.return(data);
+      });
+      return fut.wait();
+    },
+    'checkFirebase': function(pin){
+      var fut = new Future();
+      fb = new Firebase(url+pin);
+      fb.child('pin').on('value', function(snapshot) {
+        if(snapshot.val()!=pin){
+          fut.return(false);
+        } else 
+          fut.return(true);
       });
       return fut.wait();
     }
