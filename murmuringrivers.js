@@ -3,7 +3,7 @@ if (Meteor.isClient) {
   tweetsData,
   tweet;
 
-  Template.hello.rendered = function(){
+  Template.search.rendered = function(){
     var pin = Router.current().data().pin;
     Session.set('pin', pin);
     $(document).on('click', '#validate', function() {
@@ -15,7 +15,7 @@ if (Meteor.isClient) {
     });
   }
 
-Template.hello.events({
+Template.search.events({
     'click #newTweet': function () {
       if($('#hashtag').val()!==''){
         if(tweetCount==0 || Session.get("hashtag")!==$('#hashtag').val()){
@@ -57,6 +57,16 @@ Template.hello.events({
       }
     },
 });
+Template.hello.events({
+  'click #checkPin': function(){
+    var pin = $('#pin').val();
+    if(pin.length==4){
+      Router.go('search', {pin: pin});
+    }
+  }
+});
+
+
   Meteor.methods({
     'addTweet': function(){
     tweet={
@@ -87,25 +97,31 @@ if (Meteor.isServer) {
     'pushFirebase': function(pin, object){
       fb = new Firebase(url+pin);
       fb.push({tweet: object});
-  },
-  'getTweet': function(hashtag){
-      var fut = new Future();
-      if(hashtag.charAt(0)!=="#"){
-        hashtag = "#"+hashtag;
+    },
+    'getTweet': function(hashtag){
+        var fut = new Future();
+        if(hashtag.charAt(0)!=="#"){
+          hashtag = "#"+hashtag;
+      }
+      T.get('search/tweets', { q: hashtag, count: 100, result_type: "recent"}, function(err, data, response) {
+          fut.return(data);
+      });
+      return fut.wait();
     }
-    T.get('search/tweets', { q: hashtag, count: 100, result_type: "recent"}, function(err, data, response) {
-        fut.return(data);
-    });
-    return fut.wait();
-}
-});
+  });
 }
 
+Router.configure({
+  layoutTemplate: 'layout',
+});
 Router.map(function() {
-  this.route('hello', {
+  this.route('search', {
     path: '/:pin',
     data: function(){
        return {pin : this.params.pin};
-   }
-});
+    }
+  });
+  this.route('hello', {
+    path: '/',
+  });
 });

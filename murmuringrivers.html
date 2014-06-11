@@ -7,18 +7,31 @@
 
 </body>
 
-<template name="hello">
+<template name="layout">
 	<header>
 		<h1>Twitter is on fire !</h1>
 		<p>Welcome to Murmuring Rivers. A cousin of <a href="http://ramsey.io" target="_blank">Ramsey</a></p>
 	</header>
   <br>
+  {{> yield}}
+</template>
 
-<section class="form">
-	<div class="input-container">
-		<input type="text" id="hashtag" placeholder="#hashtag">
-		<div class="befText"></div>
-	</div>
-	<input type="button" id="newTweet" value="Tweet flow" />
-</section>
+<template name="hello">
+	<section class="form">
+		<div class="input-container">
+			<input type="text" id="pin" placeholder="Pin">
+			<div class="befText"></div>
+		</div>
+		<input type="button" id="checkPin" value="Synchronize" />
+	</section>
+</template>
+
+<template name="search">
+	<section class="form">
+		<div class="input-container">
+			<input type="text" id="hashtag" placeholder="#hashtag">
+			<div class="befText"></div>
+		</div>
+		<input type="button" id="newTweet" value="Tweet flow" />
+	</section>
 </template>
