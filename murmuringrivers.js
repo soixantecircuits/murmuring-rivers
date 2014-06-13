@@ -15,8 +15,19 @@ if (Meteor.isClient) {
           Router.go('hello');
         }
         else{
+          TweenMax.to($('.tweet'), 0.2, {top: "-400px"});
+          TweenMax.to($('.btn-holder'), 0.2, {top: "-400px"});
+          $('.tweetContainer').append('<p class="loadPhrase">Twitter is coming</p>');
           Meteor.call('pushFirebase', Session.get('pin'), tweet);
-          Meteor.call('addTweet');
+          setTimeout(function(){
+            $('.tweet').remove();
+            $('.btn-holder').remove();
+          }, 200);
+          setTimeout(function(){
+            Meteor.call('addTweet', function(){
+              $('.loadPhrase').remove();
+            });
+          }, 300);
         }
       });
     });
@@ -26,8 +37,20 @@ if (Meteor.isClient) {
           $('.tweetContainer').remove();
           Router.go('hello');
         }
-        else
-          Meteor.call('addTweet');
+        else{
+          TweenMax.to($('.tweet'), 0.2, {opacity:0});
+          TweenMax.to($('.btn-holder'), 0.2, {opacity:0});
+          setTimeout(function(){
+            $('.tweet').remove();
+            $('.btn-holder').remove();
+          }, 200);
+          setTimeout(function(){
+            Meteor.call('addTweet', function(){
+              $('.loadPhrase').remove();
+            });
+          }, 300);
+          $('.tweetContainer').append('<p class="loadPhrase">Twitter is coming ...</p>');
+        }
       });
     });
     $(document).on('click', '.befHeaderText', function(){
@@ -174,8 +197,11 @@ Template.hello.events({
         text: tweetsData.statuses[tweetCount].text,
         date: tweetsData.statuses[tweetCount].created_at
     };
-    $('.tweet').remove();
     $('.tweetContainer').append('<div class="tweet"><div class="circular"><img src="'+tweet.profile_picture+'"></div><strong>'+tweet.username+'</strong><p class="text">'+tweet.text+'</p><p class="date">'+tweet.date+'</p></div><div class="btn-holder"><div class="btn" id="validate"><div class="sprite befAdd"></div><span>Add</span></div><div class="btn" id="delete"><div class="sprite befDel"></div><span>Delete</span></div></div>');
+          TweenMax.to($('.tweet'), 0.01, {left: "400px", opacity: 1});
+          TweenMax.to($('.btn-holder'), 0.01, {left: "400px", opacity: 1});
+          TweenMax.to($('.tweet'), 0.4, {left: 0});
+          TweenMax.to($('.btn-holder'), 0.4, {left: 0});
     tweetCount++;
     if(tweetCount==98){
         Meteor.call('getTweet', Session.get("hashtag"), function(error, data){
