@@ -21,164 +21,220 @@
 	display: block
 	height: 0
 	clear: both
+.sprite
+	background-image: url('/sprite.png')
+	background-repeat: no-repeat
+	display: block
+	background-origin: content-box
 /* Variables */
 $darkgrey: #32333a
-$formWidth: 375px
-
+$orange:#ffa300
 // Basic CSS
+html, body
+	height: 100%
 body
 	font-family: "Lato"
-a, a:visited
-	text-decoration: none
-	color: $darkgrey
+	background: $darkgrey
+.wrapper
+	min-height: 100%
+	position: relative
+	max-width: 100%
+	overflow: hidden
+main
+	padding-bottom: 60px
+input, textarea
+	-webkit-appearance: none
+	-webkit-border-radius: 0
 //BEGIN
 header
-	text-align: center
-	margin: 20px 0 40px
-	h1
-		font-size: 3em
-		color: #53538f
-		margin-bottom: 20px
-	p
-		font-size: 1em
-		color: $darkgrey
-		a
-			font-weight: 700
-			color: $darkgrey
-			+transition(all, 400ms, ease)
-			&:hover
-				color: #7676c9
-.form
-	width: $formWidth+20
-	display: block
-	margin: 0 auto 40px
-input[type=text]
+	height: 50px
+	margin-bottom: 20px
 	position: relative
+	h1
+		a, a:visited
+			line-height: 50px
+			color: $orange
+			text-transform: uppercase
+			font-weight: 700
+			margin-left: 30px
+			z-index: 1
+			text-decoration: none
+	.header-input
+		position: absolute
+		top: 5px
+		right: -300px
+		z-index: 2
+		.befHeaderText
+			height: 100%
+			width: 50px
+			position: absolute
+			z-index: 3
+			top: 0
+			left: 0
+			.befSprite
+				background-position: -313px -5px
+				height: 16px
+				width: 12px
+				position: absolute
+				top: 15px
+				left: 20px
+hr
+	margin: 0
+	margin-top: -15px
+	height: 1px
 	display: block
-	border: 1px solid #292a30
-	+border-radius(3px, 3px)
-	width: $formWidth
-	height: 38px
-	max-width: 372px
-	margin-bottom: 10px
-	padding-left: 20px
-	line-height: 30px
-	color: #777777
-	font-size: 13px
-	z-index: 1
+	width: 100%
+	background: #2a2a32
+	border: none
+	border-bottom: 1px solid #3c3c44
+
+footer
+	height: 60px
+	text-align: center
+	position: absolute
+	bottom: 0
+	width: 100%
+	img
+		line-height: 60px
+		vertical-align: middle
+		margin-right: 15px
+	a, a:visited
+		font-weight: 700
+		line-height: 50px
+		color: #7676c9
+		text-decoration: underline
+.form
+	margin: 80px auto 20px
+	width: 100%
+	text-align: center
+.input-container
+	width: 200px
+	height: 45px
+	position: relative
+	display: inline-block
+	margin-right: -4px
+	vertical-align: top
+	input[type=text]
+		height: 45px
+		width: 140px
+		background: #f5f5f5
+		border: none
+		-webkit-border-radius: 3px 0 0 3px
+		border-radius: 3px 0 0 3px
+		padding: 0 0 0 60px
+		color: lighten(#777777, 10%)
+		font-weight: 700
+		&::-webkit-input-placeholder 
+			font-weight: 700
+			color: lighten(#777777, 10%)
+		&:-moz-placeholder  /* Firefox 18- */
+			font-weight: 700
+			color: lighten(#777777, 10%)
+		&::-moz-placeholder   /* Firefox 19+ */
+			font-weight: 700 
+			color: lighten(#777777, 10%)
+		&:-ms-input-placeholder   
+			font-weight: 700
+			color: lighten(#777777, 10%)
+		&:focus
+			outline: none
+	.befPin
+		background-position: -369px -5px
+		width: 16px
+		height: 20px
+		position: absolute
+		top: 12px
+		left: 20px
+	.befHashtag
+		background-position: -257px -5px
+		width: 12px
+		height: 16px
+		position: absolute
+		top: 15px
+		left: 20px
+
+input[type=button]
+	display: inline-block
+	height: 45px
+	width: 100px
+	background: $orange
+	color: #f5f5f5
+	border: none
+	-webkit-border-radius: 0 3px 3px 0
+	border-radius: 0 3px 3px 0
+	text-transform: uppercase
+	font-weight: 700
+	font-size: 16px
+	+transition(background, 400ms, ease)
 	&:focus
 		outline: none
-		+ .befText
-			background: #53538f
-input[type=button]
-	position: relative
-	+border-radius(1px, 1px)
-	width: 138px
-	height: 36px
-	text-transform: uppercase
-	border: none
-	cursor: pointer
-	display: block
-	margin: auto
-	+selectNone()
-	line-height: 36px
-	font-size: 13px
-	color: #fafafa
-	font-weight: 700
-	text-align: center
-	background: #7676c9
-	+transition(all, 400ms, ease)
-	&:hover
-		background: #53538f
-.input-container
-	position: relative
-
-.befText
-	position: absolute
-	top: 3px
-	left: 3px
-	display: block
-	height: 36px
-	width: 4px
-	background: #7676c8
-	z-index: 2
-	+transition(all, 400ms, ease)
-
-.loading
-	text-align: center
+	&:active
+		border: none
+		outline: none
+		background: darken($orange, 2%)
 .tweetContainer
-	width: $formWidth
-	min-width: $formWidth
-	height: 200px
-	min-height: 200px
-	margin: auto
+	width: 100%
+	height: 350px
+	border-top: 10px solid $orange
+	background: #f5f5f5
 	position: relative
-	border: 2px solid #53538f
-	+border-radius(1px, 1px)
-	padding: 10px
 	.tweet
-		color: #777777
-		font-size: 1em
+		padding: 15px
+		.circular
+			height: 48px
+			width: 48px
+			display: inline-block
+			overflow: hidden
+			+border-radius(50%, 50%)
+			vertical-align: middle
 		strong
-			display: inline-block
-			margin-left: 10px
-			font-weight: 700
-			color: #32333a
-			font-size: 1.5em
-		img
-			display: inline-block
+			font-size: 20px
+			margin-left: 15px
 		.text
-			margin: 10px 0
+			margin: 20px 0 15px
+			color: #777777
 		.date
-			font-size: 0.7em
-		.btn-holder
-			margin-top: 10px
-			position: absolute
-			bottom: 10px
-			width: $formWidth
-		button
-			position: relative
-			+border-radius(1px, 1px)
-			width: 138px
-			height: 36px
-			text-transform: uppercase
-			border: none
-			cursor: pointer
-			display: inline-block
-			margin: auto
-			+selectNone()
-			line-height: 36px
-			font-size: 13px
-			color: #fafafa
-			font-weight: 700
+			font-size: 12px
+			color: $darkgrey
+			font-weight: 400
+	.btn-holder
+		height: 50px
+		position: absolute
+		width: 100%
+		bottom: 0
+		.btn
 			text-align: center
-			background: #7676c9
-			+transition(all, 400ms, ease)
-			&:first-child
-				float: left
-				&:hover
-					background: seagreen 
-			&:nth-child(2)
-				float: right
-				&:hover
-					background: indianred
-			&:focus
-				border: none
-				outline: none
-
-@media screen and (max-width: 500px)
-	header
-		h1
-			font-size: 1.7em
-	.form
-		width: 295px
-	input
-		width: 275px
-	.tweetContainer
-		width: 275px
-		min-width: 275px
-		.tweet
-			button
-				width: 100px
-			.btn-holder
-				width: 275px
+			line-height: 50px
+			text-transform: uppercase
+			color: $darkgrey
+			font-size: 14px
+			display: inline-block
+			width: 50%
+			background: #e2e2e2
+			font-weight: 700
+			position: relative
+			&:hover
+				background: darken(#e2e2e2, 5%)
+			span
+				margin-left: 30px
+		#validate
+			margin-right: -6px
+			border-right: 2px solid #f5f5f5
+			.befAdd
+				background-position: -5px -5px
+				height: 22px
+				width: 22px
+				position: absolute
+				top: 14px
+				left: 40px
+		#delete
+			margin-left: -2px
+			border-left: 2px solid #f5f5f5
+			padding-right: 4px
+			.befDel
+				background-position: -171px -5px
+				height: 22px
+				width: 22px
+				position: absolute
+				top: 14px
+				left: 40px

@@ -6,33 +6,83 @@ if (Meteor.isClient) {
   Template.search.pin = function(){
     return Router.current().data().pin;
   }
-
   Template.search.rendered = function(){
-    var pin = Router.current().data().pin;
-    Session.set('pin', pin);
+    var pin = Session.get('pin');
     $(document).on('click', '#validate', function() {
-      Meteor.call('pushFirebase', Session.get('pin'), tweet);
-      Meteor.call('addTweet');
+      Meteor.call('checkFirebase', pin, function(error, data){
+        if(!data){
+          $('.tweetContainer').remove();         
+          Router.go('hello');
+        }
+        else{
+          Meteor.call('pushFirebase', Session.get('pin'), tweet);
+          Meteor.call('addTweet');
+        }
+      });
     });
     $(document).on('click', '#delete', function() {
-      Meteor.call('addTweet');
+      Meteor.call('checkFirebase', pin, function(error, data){
+        if(!data){
+          $('.tweetContainer').remove();
+          Router.go('hello');
+        }
+        else
+          Meteor.call('addTweet');
+      });
+    });
+    $(document).on('click', '.befHeaderText', function(){
+      TweenMax.to($('header'), 0.5, {left: "-250px"});
+    });
+    $(document).on('touchmove', '.befHeaderText', function(){
+      TweenMax.to($('header'), 0.5, {left: "-250px"});
+    });
+    $(document).on('touchstart', '.befHeaderText', function(){
+      TweenMax.to($('header'), 0.5, {left: "-250px", delay: 0.5});
+    });
+    $(document).on('click', '#newHeaderTweet', function(){
+      TweenMax.to($('header'), 0.5, {left: 0});
+      if($('#hashtagHeader').val()!==''){
+        if(tweetCount==0 || Session.get("hashtag")!==$('#hashtagHeader').val()){
+          Session.set("hashtag", $('#hashtagHeader').val());
+          TweenMax.to($('.form'), 0.15, {scale: 0, transformOrigin: "center"});
+          TweenMax.to($('.form'), 0.01, {scale: 1, transformOrigin: "center", display: "none", delay: 0.15});
+          TweenMax.to($('.header-input'), 0.2, {right: '-250px'});
+          $('.form').after('<div class="loader"></div>');
+          $('.tweetContainer').remove();
+          Meteor.call('getTweet', Session.get("hashtag"), function(error, data){
+            if(error)
+              console.log(error);
+            else{
+              tweetsData=data;
+          }
+          $('.loader').remove();
+          $('.form').after('<section class="tweetContainer"></section>');
+          Meteor.call('addTweet');
+          $('#hashtagHeader').val("");
+          });
+        }
+      }
     });
   }
+
 
 Template.search.events({
     'click #newTweet': function () {
       if($('#hashtag').val()!==''){
         if(tweetCount==0 || Session.get("hashtag")!==$('#hashtag').val()){
           Session.set("hashtag", $('#hashtag').val());
-          $('.form').after('<p class="loading">Wait before loading</p>');
+          TweenMax.to($('.form'), 0.15, {scale: 0, transformOrigin: "center"});
+          TweenMax.to($('.form'), 0.01, {scale: 1, transformOrigin: "center", display: "none", delay: 0.15});
+          TweenMax.to($('.header-input'), 0.2, {right: '-250px'});
+          $('.form').after('<div class="loader"></div>');
           $('.tweetContainer').remove();
           Meteor.call('getTweet', Session.get("hashtag"), function(error, data){
             if(error)
               console.log(error);
-          else{
+            else{
               tweetsData=data;
           }
-          $('.loading').remove();
+          $('.loader').remove();
           $('.form').after('<section class="tweetContainer"></section>');
           Meteor.call('addTweet');
           });
@@ -41,23 +91,26 @@ Template.search.events({
     },
     'keypress #hashtag': function(evt){
       if (evt.keyCode === 13) {
-        if($('#hashtag').val()!==''){
-          if(tweetCount==0 || Session.get("hashtag")!==$('#hashtag').val()){
-            Session.set("hashtag", $('#hashtag').val());
-            $('.form').after('<p class="loading">Wait before loading</p>');
-            $('.tweetContainer').remove();
-            Meteor.call('getTweet', Session.get("hashtag"), function(error, data){
-              if(error)
-                console.log(error);
+      if($('#hashtag').val()!==''){
+        if(tweetCount==0 || Session.get("hashtag")!==$('#hashtag').val()){
+          Session.set("hashtag", $('#hashtag').val());
+          TweenMax.to($('.form'), 0.15, {scale: 0, transformOrigin: "center"});
+          TweenMax.to($('.form'), 0.01, {scale: 1, transformOrigin: "center", display: "none", delay: 0.15});
+          TweenMax.to($('.header-input'), 0.2, {right: '-250px'});
+          $('.form').after('<div class="loader"></div>');
+          $('.tweetContainer').remove();
+          Meteor.call('getTweet', Session.get("hashtag"), function(error, data){
+            if(error)
+              console.log(error);
             else{
-                tweetsData=data;
-            }
-            $('.loading').remove();
-            $('.form').after('<section class="tweetContainer"></section>');
-            Meteor.call('addTweet');
-            });
+              tweetsData=data;
           }
+          $('.loader').remove();
+          $('.form').after('<section class="tweetContainer"></section>');
+          Meteor.call('addTweet');
+          });
         }
+      }
       }
     },
 });
@@ -66,21 +119,50 @@ Template.hello.events({
     var pin = $('#pin').val();
     if(pin.length==4){
       $('#pin').css({border: '1px solid #292a30'});
+      $('#state').remove();
+      $('#checkPin').after('<div class="loader"></div>');
       Meteor.call('checkFirebase', pin, function(error, data){
-        if(data)
+        if(data){
+          Meteor.call('activeFirebase', pin);
           Router.go('search', {pin: pin});
+        }
         else {
-          $('#pin').css({border: '1px solid indianred'});
+          
+          $('#state').remove();
+          $('#checkPin').after('<p id="state">Your pin is invalid</p>');
+        }
+      });
+    } else {
+      
+      $('#state').remove();
+      $('#checkPin').after('<p id="state">Your pin is invalid</p>');
+    }
+  },
+  'keypress #pin': function(evt){
+    if (evt.keyCode === 13) {
+    var pin = $('#pin').val();
+    if(pin.length==4){
+      $('#pin').css({border: '1px solid #292a30'});
+      $('#state').remove();
+      $('#checkPin').after('<div class="loader"></div>');
+      Meteor.call('checkFirebase', pin, function(error, data){
+        if(data){
+          Meteor.call('activeFirebase', pin);
+          Router.go('search', {pin: pin});
+        }
+        else {
+          
           $('#state').remove();
           $('#checkPin').after('<p id="state">Votre pin est invalide</p>');
         }
       });
     } else {
-      $('#pin').css({border: '1px solid indianred'});
+      
       $('#state').remove();
       $('#checkPin').after('<p id="state">Votre pin est invalide</p>');
     }
-  }
+    }
+  },
 });
 
 
@@ -93,7 +175,7 @@ Template.hello.events({
         date: tweetsData.statuses[tweetCount].created_at
     };
     $('.tweet').remove();
-    $('.tweetContainer').append('<div class="tweet"><img src="'+tweet.profile_picture+'"><strong>'+tweet.username+'</strong><p class="text">'+tweet.text+'</p><p class="date">'+tweet.date+'</p><div class="btn-holder"><button id="validate">Validate</button><button id="delete">Delete</button><div class="clearfix"></div></div></div>');
+    $('.tweetContainer').append('<div class="tweet"><div class="circular"><img src="'+tweet.profile_picture+'"></div><strong>'+tweet.username+'</strong><p class="text">'+tweet.text+'</p><p class="date">'+tweet.date+'</p></div><div class="btn-holder"><div class="btn" id="validate"><div class="sprite befAdd"></div><span>Add</span></div><div class="btn" id="delete"><div class="sprite befDel"></div><span>Delete</span></div></div>');
     tweetCount++;
     if(tweetCount==98){
         Meteor.call('getTweet', Session.get("hashtag"), function(error, data){
@@ -135,6 +217,10 @@ if (Meteor.isServer) {
           fut.return(true);
       });
       return fut.wait();
+    },
+    'activeFirebase': function(pin){
+      fb = new Firebase(url+pin);
+      fb.child('active').set(true);
     }
   });
 }
@@ -147,7 +233,15 @@ Router.map(function() {
     path: '/:pin',
     data: function(){
        return {pin : this.params.pin};
-    }
+    },
+    onBeforeAction: function() {
+      var pin = Router.current().data().pin;
+      Session.set('pin', pin);
+      Meteor.call('checkFirebase', pin, function(error, data){
+        if(!data)
+          Router.go('hello');
+      });
+    },
   });
   this.route('hello', {
     path: '/',

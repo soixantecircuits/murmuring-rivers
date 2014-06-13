@@ -8,31 +8,48 @@
 </body>
 
 <template name="layout">
-	<header>
-		<h1>Twitter is on fire !</h1>
-		<p>Welcome to Murmuring Rivers. A cousin of <a href="http://ramsey.io" target="_blank">Ramsey</a></p>
-	</header>
-  {{> yield}}
+	<div class="wrapper">
+		<header>
+			<h1><a href="{{pathFor 'hello'}}">Ramsey demo app</a></h1>
+			<div class="header-input">
+				<div class="input-container">
+					<input type="text" id="hashtagHeader" placeholder="Your hashtag">
+					<div class="befHeaderText">
+						<div class="sprite befSprite"></div>
+					</div>
+				</div>
+				<input type="button" id="newHeaderTweet" value="Go" />
+			</div>
+		</header>
+		<hr>
+		<main>
+			{{> yield}}
+		</main>  
+	  <footer>
+	  	<a href="http://ramsey.io" target="_blank">
+	  		<img src="/logo.png">
+	  		More about Ramsey
+	  	</a>
+	  </footer>
+	</div>
 </template>
 
 <template name="hello">
 	<section class="form">
 		<div class="input-container">
-			<input type="text" id="pin" placeholder="Pin" maxlength="4">
-			<div class="befText"></div>
+			<input type="text" id="pin" placeholder="Your PIN" maxlength="4">
+			<div class="befPin sprite"></div>
 		</div>
-		<input type="button" id="checkPin" value="Synchronize" />
-		<p id="state"></p>
+		<input type="button" id="checkPin" value="Synchro" />
 	</section>
 </template>
 
 <template name="search">
 	<section class="form">
-	<p>Your pin is <strong>{{pin}}</strong></p>
 		<div class="input-container">
-			<input type="text" id="hashtag" placeholder="#hashtag">
-			<div class="befText"></div>
+			<input type="text" id="hashtag" placeholder="Your hashtag">
+			<div class="befHashtag sprite"></div>
 		</div>
-		<input type="button" id="newTweet" value="Tweet flow" />
+		<input type="button" id="newTweet" value="Go"/>
 	</section>
 </template>
