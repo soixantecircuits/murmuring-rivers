@@ -1,33 +1,49 @@
 if (Meteor.isClient) {
   var tweetCount =0,
+  tweetAdded = 0,
   tweetsData,
   tweet;
 
+  Template.layout.title = function(){
+    var title = Session.get('hashtag');
+    if(title!=="Try me like one of this french girls")
+      title = "#"+title;
+    return title;
+  }
   Template.search.pin = function(){
     return Router.current().data().pin;
   }
   Template.search.rendered = function(){
+    $('endForm').remove();
     var pin = Session.get('pin');
+
     $(document).on('click', '#validate', function() {
+      tweetAdded++;
       Meteor.call('checkFirebase', pin, function(error, data){
         if(!data){
           $('.tweetContainer').remove();         
           Router.go('hello');
         }
         else{
-          TweenMax.to($('.tweet'), 0.2, {top: "-400px"});
-          TweenMax.to($('.btn-holder'), 0.2, {top: "-400px"});
-          $('.tweetContainer').append('<p class="loadPhrase">Twitter is coming</p>');
-          Meteor.call('pushFirebase', Session.get('pin'), tweet);
+          TweenMax.to($('.tweetContainer'), 0.2, {top: "-400px"});
+          $('main').append('<p class="loadPhrase">#'+Session.get('hashtag')+' is coming</p>');
+          Meteor.call('pushFirebase', Session.get('pin'), tweet, function(error){
+            if(error)
+              console.log(error);
+          });
           setTimeout(function(){
-            $('.tweet').remove();
-            $('.btn-holder').remove();
+            $('.tweetContainer').remove();
           }, 200);
           setTimeout(function(){
             Meteor.call('addTweet', function(){
               $('.loadPhrase').remove();
             });
           }, 300);
+          if(tweetAdded=5){
+            setTimeout(function(){
+              $('main').append('<section class="endForm"><p>Sign up for more</p></section>');
+            }, 500);
+          }
         }
       });
     });
@@ -38,34 +54,47 @@ if (Meteor.isClient) {
           Router.go('hello');
         }
         else{
-          TweenMax.to($('.tweet'), 0.2, {opacity:0});
-          TweenMax.to($('.btn-holder'), 0.2, {opacity:0});
+          TweenMax.to($('.tweetContainer'), 0.2, {opacity: 0});
+          $('main').append('<p class="loadPhrase">#'+Session.get('hashtag')+' is coming</p>');
           setTimeout(function(){
-            $('.tweet').remove();
-            $('.btn-holder').remove();
+            $('.tweetContainer').remove();
           }, 200);
           setTimeout(function(){
             Meteor.call('addTweet', function(){
               $('.loadPhrase').remove();
             });
           }, 300);
-          $('.tweetContainer').append('<p class="loadPhrase">Twitter is coming ...</p>');
+          if(tweetCount==5){
+            setTimeout(function(){
+              $('main').append('<section class="endForm"><p>Sign up for more</p></section>');
+            }, 500);
+          }
         }
       });
     });
     $(document).on('click', '.befHeaderText', function(){
-      TweenMax.to($('header'), 0.5, {left: "-250px"});
+      if($('header').css("left")!="-250px")
+        TweenMax.to($('header'), 0.5, {left: "-250px"});
+      else
+        TweenMax.to($('header'), 0.5, {left: 0});
     });
     $(document).on('touchmove', '.befHeaderText', function(){
-      TweenMax.to($('header'), 0.5, {left: "-250px"});
+      if($('header').css("left")!="-250px")
+        TweenMax.to($('header'), 0.5, {left: "-250px"});
+      else
+        TweenMax.to($('header'), 0.5, {left: 0});
     });
     $(document).on('touchstart', '.befHeaderText', function(){
-      TweenMax.to($('header'), 0.5, {left: "-250px", delay: 0.5});
+      if($('header').css("left")!="-250px")
+        TweenMax.to($('header'), 0.5, {left: "-250px"});
+      else
+        TweenMax.to($('header'), 0.5, {left: 0});
     });
     $(document).on('click', '#newHeaderTweet', function(){
       TweenMax.to($('header'), 0.5, {left: 0});
-      if($('#hashtagHeader').val()!==''){
+      if($('#hashtagHeader').val()!=='' && tweetCount<5){
         if(tweetCount==0 || Session.get("hashtag")!==$('#hashtagHeader').val()){
+          document.getElementById('hashtagHeader').placeholder=$('#hashtagHeader').val();
           Session.set("hashtag", $('#hashtagHeader').val());
           TweenMax.to($('.form'), 0.15, {scale: 0, transformOrigin: "center"});
           TweenMax.to($('.form'), 0.01, {scale: 1, transformOrigin: "center", display: "none", delay: 0.15});
@@ -79,7 +108,6 @@ if (Meteor.isClient) {
               tweetsData=data;
           }
           $('.loader').remove();
-          $('.form').after('<section class="tweetContainer"></section>');
           Meteor.call('addTweet');
           $('#hashtagHeader').val("");
           });
@@ -87,13 +115,20 @@ if (Meteor.isClient) {
       }
     });
   }
-
+  Template.hello.rendered = function(){
+    delete Session.keys['pin'];
+    Session.set('hashtag', "Try me like one of this french girls");
+    $('.loader').remove();
+    $('.tweetContainer').remove();
+    $('endForm').remove();
+  }
 
 Template.search.events({
     'click #newTweet': function () {
       if($('#hashtag').val()!==''){
         if(tweetCount==0 || Session.get("hashtag")!==$('#hashtag').val()){
           Session.set("hashtag", $('#hashtag').val());
+          document.getElementById('hashtagHeader').placeholder=$('#hashtag').val();
           TweenMax.to($('.form'), 0.15, {scale: 0, transformOrigin: "center"});
           TweenMax.to($('.form'), 0.01, {scale: 1, transformOrigin: "center", display: "none", delay: 0.15});
           TweenMax.to($('.header-input'), 0.2, {right: '-250px'});
@@ -106,7 +141,6 @@ Template.search.events({
               tweetsData=data;
           }
           $('.loader').remove();
-          $('.form').after('<section class="tweetContainer"></section>');
           Meteor.call('addTweet');
           });
         }
@@ -117,6 +151,7 @@ Template.search.events({
       if($('#hashtag').val()!==''){
         if(tweetCount==0 || Session.get("hashtag")!==$('#hashtag').val()){
           Session.set("hashtag", $('#hashtag').val());
+          document.getElementById('hashtagHeader').placeholder=$('#hashtag').val();
           TweenMax.to($('.form'), 0.15, {scale: 0, transformOrigin: "center"});
           TweenMax.to($('.form'), 0.01, {scale: 1, transformOrigin: "center", display: "none", delay: 0.15});
           TweenMax.to($('.header-input'), 0.2, {right: '-250px'});
@@ -129,7 +164,6 @@ Template.search.events({
               tweetsData=data;
           }
           $('.loader').remove();
-          $('.form').after('<section class="tweetContainer"></section>');
           Meteor.call('addTweet');
           });
         }
@@ -176,12 +210,14 @@ Template.hello.events({
         else {
           
           $('#state').remove();
+          $('.loader').remove();
           $('#checkPin').after('<p id="state">Votre pin est invalide</p>');
         }
       });
     } else {
       
       $('#state').remove();
+      $('.loader').remove();
       $('#checkPin').after('<p id="state">Votre pin est invalide</p>');
     }
     }
@@ -197,22 +233,12 @@ Template.hello.events({
         text: tweetsData.statuses[tweetCount].text,
         date: tweetsData.statuses[tweetCount].created_at
     };
-    $('.tweetContainer').append('<div class="tweet"><div class="circular"><img src="'+tweet.profile_picture+'"></div><strong>'+tweet.username+'</strong><p class="text">'+tweet.text+'</p><p class="date">'+tweet.date+'</p></div><div class="btn-holder"><div class="btn" id="validate"><div class="sprite befAdd"></div><span>Add</span></div><div class="btn" id="delete"><div class="sprite befDel"></div><span>Delete</span></div></div>');
+    $('main').append('<div class="tweetContainer"><div class="tweet"><div class="circular"><img src="'+tweet.profile_picture+'"></div><strong>'+tweet.username+'</strong><p class="text">'+tweet.text+'</p><p class="date">'+tweet.date+'</p></div><div class="btn-holder"><div class="btn" id="validate"><div class="sprite befAdd"></div><span>Add</span></div><div class="btn" id="delete"><div class="sprite befDel"></div><span>Delete</span></div></div></div>');
           TweenMax.to($('.tweet'), 0.01, {left: "400px", opacity: 1});
           TweenMax.to($('.btn-holder'), 0.01, {left: "400px", opacity: 1});
           TweenMax.to($('.tweet'), 0.4, {left: 0});
           TweenMax.to($('.btn-holder'), 0.4, {left: 0});
     tweetCount++;
-    if(tweetCount==98){
-        Meteor.call('getTweet', Session.get("hashtag"), function(error, data){
-            if(error)
-                console.log(error);
-            else{
-                tweetCount=1;
-                tweetsData=data;
-            }
-        });
-    }
   }
 });
 }
@@ -228,7 +254,7 @@ if (Meteor.isServer) {
         if(hashtag.charAt(0)!=="#"){
           hashtag = "#"+hashtag;
       }
-      T.get('search/tweets', { q: hashtag, count: 100, result_type: "recent"}, function(err, data, response) {
+      T.get('search/tweets', { q: hashtag, count: 50, result_type: "recent"}, function(err, data, response) {
           fut.return(data);
       });
       return fut.wait();

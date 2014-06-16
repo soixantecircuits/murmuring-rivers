@@ -298,6 +298,17 @@ input[type=button]:active {
 }
 
 /* line 175, ../sass/screen.sass */
+.loadPhrase {
+  display: inline-block;
+  position: absolute;
+  top: 48%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: whitesmoke;
+}
+
+/* line 183, ../sass/screen.sass */
 .tweetContainer {
   width: 100%;
   height: 320px;
@@ -305,21 +316,12 @@ input[type=button]:active {
   background: whitesmoke;
   position: relative;
 }
-/* line 181, ../sass/screen.sass */
-.tweetContainer .loadPhrase {
-  display: inline-block;
-  position: absolute;
-  top: 48%;
-  left: 0;
-  width: 100%;
-  text-align: center;
-}
-/* line 188, ../sass/screen.sass */
+/* line 189, ../sass/screen.sass */
 .tweetContainer .tweet {
   position: relative;
   padding: 15px;
 }
-/* line 191, ../sass/screen.sass */
+/* line 192, ../sass/screen.sass */
 .tweetContainer .tweet .circular {
   height: 48px;
   width: 48px;
@@ -330,30 +332,30 @@ input[type=button]:active {
   border-radius: 50% / 50%;
   vertical-align: middle;
 }
-/* line 198, ../sass/screen.sass */
+/* line 199, ../sass/screen.sass */
 .tweetContainer .tweet strong {
   font-size: 20px;
   margin-left: 15px;
 }
-/* line 201, ../sass/screen.sass */
+/* line 202, ../sass/screen.sass */
 .tweetContainer .tweet .text {
   margin: 20px 0 15px;
   color: #777777;
 }
-/* line 204, ../sass/screen.sass */
+/* line 205, ../sass/screen.sass */
 .tweetContainer .tweet .date {
   font-size: 12px;
   color: #32333a;
   font-weight: 400;
 }
-/* line 208, ../sass/screen.sass */
+/* line 209, ../sass/screen.sass */
 .tweetContainer .btn-holder {
   height: 50px;
   position: absolute;
   width: 100%;
   bottom: 0;
 }
-/* line 213, ../sass/screen.sass */
+/* line 214, ../sass/screen.sass */
 .tweetContainer .btn-holder .btn {
   text-align: center;
   line-height: 50px;
@@ -366,20 +368,20 @@ input[type=button]:active {
   font-weight: 700;
   position: relative;
 }
-/* line 224, ../sass/screen.sass */
+/* line 225, ../sass/screen.sass */
 .tweetContainer .btn-holder .btn:hover {
   background: #d5d5d5;
 }
-/* line 226, ../sass/screen.sass */
+/* line 227, ../sass/screen.sass */
 .tweetContainer .btn-holder .btn span {
   margin-left: 30px;
 }
-/* line 228, ../sass/screen.sass */
+/* line 229, ../sass/screen.sass */
 .tweetContainer .btn-holder #validate {
   margin-right: -6px;
   border-right: 2px solid whitesmoke;
 }
-/* line 231, ../sass/screen.sass */
+/* line 232, ../sass/screen.sass */
 .tweetContainer .btn-holder #validate .befAdd {
   background-position: -5px -5px;
   height: 22px;
@@ -388,13 +390,13 @@ input[type=button]:active {
   top: 14px;
   left: 40px;
 }
-/* line 238, ../sass/screen.sass */
+/* line 239, ../sass/screen.sass */
 .tweetContainer .btn-holder #delete {
   margin-left: -2px;
   border-left: 2px solid whitesmoke;
   padding-right: 4px;
 }
-/* line 242, ../sass/screen.sass */
+/* line 243, ../sass/screen.sass */
 .tweetContainer .btn-holder #delete .befDel {
   background-position: -171px -5px;
   height: 22px;
@@ -402,4 +404,22 @@ input[type=button]:active {
   position: absolute;
   top: 14px;
   left: 40px;
+}
+
+/* line 250, ../sass/screen.sass */
+#state {
+  color: whitesmoke;
+  margin-top: 30px;
+}
+
+/* line 253, ../sass/screen.sass */
+.endForm {
+  width: 100%;
+  color: whitesmoke;
+  padding: 15px;
+}
+/* line 257, ../sass/screen.sass */
+.endForm p {
+  font-size: 18px;
+  text-align: center;
 }
