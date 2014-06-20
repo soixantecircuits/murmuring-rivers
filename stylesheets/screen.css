@@ -242,6 +242,10 @@ footer a, footer a:visited {
   outline: none;
 }
 /* line 141, ../sass/screen.sass */
+.input-container input[type=number]:active, .input-container input[type=text]:active {
+  border: none;
+}
+/* line 143, ../sass/screen.sass */
 .input-container .befPin {
   background-position: -369px -5px;
   width: 16px;
@@ -250,7 +254,7 @@ footer a, footer a:visited {
   top: 12px;
   left: 20px;
 }
-/* line 148, ../sass/screen.sass */
+/* line 150, ../sass/screen.sass */
 .input-container .befHashtag {
   background-position: -257px -5px;
   width: 12px;
@@ -260,7 +264,7 @@ footer a, footer a:visited {
   left: 20px;
 }
 
-/* line 156, ../sass/screen.sass */
+/* line 158, ../sass/screen.sass */
 input[type=button] {
   display: inline-block;
   height: 45px;
@@ -286,18 +290,18 @@ input[type=button] {
   -o-transition-timing-function: ease;
   transition-timing-function: ease;
 }
-/* line 169, ../sass/screen.sass */
+/* line 171, ../sass/screen.sass */
 input[type=button]:focus {
   outline: none;
 }
-/* line 171, ../sass/screen.sass */
+/* line 173, ../sass/screen.sass */
 input[type=button]:active {
   border: none;
   outline: none;
   background: #f59c00;
 }
 
-/* line 175, ../sass/screen.sass */
+/* line 177, ../sass/screen.sass */
 .loadPhrase {
   display: inline-block;
   position: absolute;
@@ -308,7 +312,7 @@ input[type=button]:active {
   color: whitesmoke;
 }
 
-/* line 183, ../sass/screen.sass */
+/* line 185, ../sass/screen.sass */
 .tweetContainer {
   width: 100%;
   height: 320px;
@@ -316,12 +320,12 @@ input[type=button]:active {
   background: whitesmoke;
   position: relative;
 }
-/* line 189, ../sass/screen.sass */
+/* line 191, ../sass/screen.sass */
 .tweetContainer .tweet {
   position: relative;
   padding: 15px;
 }
-/* line 192, ../sass/screen.sass */
+/* line 194, ../sass/screen.sass */
 .tweetContainer .tweet .circular {
   height: 48px;
   width: 48px;
@@ -332,30 +336,30 @@ input[type=button]:active {
   border-radius: 50% / 50%;
   vertical-align: middle;
 }
-/* line 199, ../sass/screen.sass */
+/* line 201, ../sass/screen.sass */
 .tweetContainer .tweet strong {
   font-size: 20px;
   margin-left: 15px;
 }
-/* line 202, ../sass/screen.sass */
+/* line 204, ../sass/screen.sass */
 .tweetContainer .tweet .text {
   margin: 20px 0 15px;
   color: #777777;
 }
-/* line 205, ../sass/screen.sass */
+/* line 207, ../sass/screen.sass */
 .tweetContainer .tweet .date {
   font-size: 12px;
   color: #32333a;
   font-weight: 400;
 }
-/* line 209, ../sass/screen.sass */
+/* line 211, ../sass/screen.sass */
 .tweetContainer .btn-holder {
   height: 50px;
   position: absolute;
   width: 100%;
   bottom: 0;
 }
-/* line 214, ../sass/screen.sass */
+/* line 216, ../sass/screen.sass */
 .tweetContainer .btn-holder .btn {
   text-align: center;
   line-height: 50px;
@@ -368,20 +372,20 @@ input[type=button]:active {
   font-weight: 700;
   position: relative;
 }
-/* line 225, ../sass/screen.sass */
+/* line 227, ../sass/screen.sass */
 .tweetContainer .btn-holder .btn:hover {
   background: #d5d5d5;
 }
-/* line 227, ../sass/screen.sass */
+/* line 229, ../sass/screen.sass */
 .tweetContainer .btn-holder .btn span {
   margin-left: 30px;
 }
-/* line 229, ../sass/screen.sass */
+/* line 231, ../sass/screen.sass */
 .tweetContainer .btn-holder #validate {
   margin-right: -6px;
   border-right: 2px solid whitesmoke;
 }
-/* line 232, ../sass/screen.sass */
+/* line 234, ../sass/screen.sass */
 .tweetContainer .btn-holder #validate .befAdd {
   background-position: -5px -5px;
   height: 22px;
@@ -390,13 +394,13 @@ input[type=button]:active {
   top: 14px;
   left: 40px;
 }
-/* line 239, ../sass/screen.sass */
+/* line 241, ../sass/screen.sass */
 .tweetContainer .btn-holder #delete {
   margin-left: -2px;
   border-left: 2px solid whitesmoke;
   padding-right: 4px;
 }
-/* line 243, ../sass/screen.sass */
+/* line 245, ../sass/screen.sass */
 .tweetContainer .btn-holder #delete .befDel {
   background-position: -171px -5px;
   height: 22px;
@@ -406,19 +410,19 @@ input[type=button]:active {
   left: 40px;
 }
 
-/* line 250, ../sass/screen.sass */
+/* line 252, ../sass/screen.sass */
 #state {
   color: whitesmoke;
   margin-top: 30px;
 }
 
-/* line 253, ../sass/screen.sass */
+/* line 255, ../sass/screen.sass */
 .endForm {
   width: 100%;
   color: whitesmoke;
   padding: 15px;
 }
-/* line 257, ../sass/screen.sass */
+/* line 259, ../sass/screen.sass */
 .endForm p {
   font-size: 18px;
   text-align: center;

@@ -16,9 +16,27 @@ if (Meteor.isClient) {
   Template.search.rendered = function(){
     $('endForm').remove();
     var pin = Session.get('pin');
+    Meteor.call('getTweetNumber', pin, function(error, data){
+      if(error)
+        console.log(error);
+      else{
+        tweetAdded = data;
+        if(tweetAdded>=7){
+          $('.endForm').remove();
+          $('main').append('<section class="endForm"><p>Sign up for more</p></section>');
+        } else {
+          $('main').append('<section class="form"><div class="input-container"><input type="text" id="hashtag" placeholder="Your hashtag" autofocus="autofocus"><div class="befHashtag sprite"></div></div><input type="button" id="newTweet" value="Go"/></section>');
+        }
+      }
+    });
 
     $(document).on('click', '#validate', function() {
-      tweetAdded++;
+      Meteor.call('getTweetNumber', pin, function(error, data){
+        if(error)
+          console.log(error);
+        else
+          tweetAdded = data;
+      });
       Meteor.call('checkFirebase', pin, function(error, data){
         if(!data){
           $('.tweetContainer').remove();         
@@ -34,15 +52,17 @@ if (Meteor.isClient) {
           setTimeout(function(){
             $('.tweetContainer').remove();
           }, 200);
-          setTimeout(function(){
-            Meteor.call('addTweet', function(){
-              $('.loadPhrase').remove();
-            });
-          }, 300);
-          if(tweetAdded=5){
+          if(tweetAdded==5){
             setTimeout(function(){
+              $('.loadPhrase').remove();
               $('main').append('<section class="endForm"><p>Sign up for more</p></section>');
             }, 500);
+          } else {
+            setTimeout(function(){
+              Meteor.call('addTweet', function(){
+                $('.loadPhrase').remove();
+              });
+            }, 300);
           }
         }
       });
@@ -54,20 +74,23 @@ if (Meteor.isClient) {
           Router.go('hello');
         }
         else{
-          TweenMax.to($('.tweetContainer'), 0.2, {opacity: 0});
+          TweenMax.to($('.tweetContainer'), 0.2, {top: "-400px"});
           $('main').append('<p class="loadPhrase">#'+Session.get('hashtag')+' is coming</p>');
           setTimeout(function(){
             $('.tweetContainer').remove();
           }, 200);
-          setTimeout(function(){
-            Meteor.call('addTweet', function(){
-              $('.loadPhrase').remove();
-            });
-          }, 300);
-          if(tweetCount==5){
+          if(tweetAdded==5){
             setTimeout(function(){
+              $('.loadPhrase').remove();
               $('main').append('<section class="endForm"><p>Sign up for more</p></section>');
             }, 500);
+          } 
+          else {
+            setTimeout(function(){
+              Meteor.call('addTweet', function(){
+                $('.loadPhrase').remove();
+              });
+            }, 300);
           }
         }
       });
@@ -120,7 +143,7 @@ if (Meteor.isClient) {
     Session.set('hashtag', "Try me like one of this french girls");
     $('.loader').remove();
     $('.tweetContainer').remove();
-    $('endForm').remove();
+    $('.endForm').remove();
   }
 
 Template.search.events({
@@ -178,6 +201,7 @@ Template.hello.events({
       $('#pin').css({border: '1px solid #292a30'});
       $('#state').remove();
       $('#checkPin').after('<div class="loader"></div>');
+      Meteor.call('getTweetNumber', pin);
       Meteor.call('checkFirebase', pin, function(error, data){
         if(data){
           Meteor.call('activeFirebase', pin);
@@ -202,6 +226,7 @@ Template.hello.events({
       $('#pin').css({border: '1px solid #292a30'});
       $('#state').remove();
       $('#checkPin').after('<div class="loader"></div>');
+      Meteor.call('getTweetNumber', pin);
       Meteor.call('checkFirebase', pin, function(error, data){
         if(data){
           Meteor.call('activeFirebase', pin);
@@ -273,6 +298,15 @@ if (Meteor.isServer) {
     'activeFirebase': function(pin){
       fb = new Firebase(url+pin);
       fb.child('active').set(true);
+    },
+    'getTweetNumber': function(pin){
+      var fut = new Future();
+      fb = new Firebase(url+pin);
+      fb.once('value', function(dataSnapshot) {
+        var x = dataSnapshot.numChildren();
+        fut.return(x);
+      });
+      return fut.wait();
     }
   });
 }
