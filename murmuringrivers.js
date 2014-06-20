@@ -182,14 +182,15 @@ if (Meteor.isClient) {
         }
       }
       }
-    } )
-  Template.hello.rendered = function(){
-    delete Session.keys['pin'];
-    Session.set('hashtag', "Try me like one of this french girls");
-    $('.loader').remove();
-    $('.tweetContainer').remove();
-    $('.endForm').remove();
+    });
   }
+Template.hello.rendered = function(){
+  delete Session.keys['pin'];
+  Session.set('hashtag', "Try me like one of this french girls");
+  $('.loader').remove();
+  $('.tweetContainer').remove();
+  $('.endForm').remove();
+}
 Template.hello.events({
   'click #checkPin': function(){
     var pin = $('#pin').val();
