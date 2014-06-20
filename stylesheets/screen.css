@@ -115,13 +115,13 @@ input, textarea {
 
 /* line 49, ../sass/screen.sass */
 header {
-  height: 50px;
+  height: 60px;
   margin-bottom: 20px;
   position: relative;
 }
 /* line 54, ../sass/screen.sass */
 header h1 a, header h1 a:visited {
-  line-height: 50px;
+  line-height: 30px;
   color: #ffa300;
   text-transform: uppercase;
   font-weight: 700;
