@@ -137,17 +137,7 @@ if (Meteor.isClient) {
         }
       }
     });
-  }
-  Template.hello.rendered = function(){
-    delete Session.keys['pin'];
-    Session.set('hashtag', "Try me like one of this french girls");
-    $('.loader').remove();
-    $('.tweetContainer').remove();
-    $('.endForm').remove();
-  }
-
-Template.search.events({
-    'click #newTweet': function () {
+    $(document).on('click', '#newTweet', function(){
       if($('#hashtag').val()!==''){
         if(tweetCount==0 || Session.get("hashtag")!==$('#hashtag').val()){
           Session.set("hashtag", $('#hashtag').val());
@@ -168,8 +158,8 @@ Template.search.events({
           });
         }
       }
-    },
-    'keypress #hashtag': function(evt){
+    });
+    $(document).on( "keypress", '#hashtag', function(evt){
       if (evt.keyCode === 13) {
       if($('#hashtag').val()!==''){
         if(tweetCount==0 || Session.get("hashtag")!==$('#hashtag').val()){
@@ -192,8 +182,14 @@ Template.search.events({
         }
       }
       }
-    },
-});
+    } )
+  Template.hello.rendered = function(){
+    delete Session.keys['pin'];
+    Session.set('hashtag', "Try me like one of this french girls");
+    $('.loader').remove();
+    $('.tweetContainer').remove();
+    $('.endForm').remove();
+  }
 Template.hello.events({
   'click #checkPin': function(){
     var pin = $('#pin').val();
