@@ -59,8 +59,13 @@ if (Meteor.isClient) {
             }, 500);
           } else {
             setTimeout(function(){
-              Meteor.call('addTweet', function(){
+              Meteor.call('addTweet', function(err){
                 $('.loadPhrase').remove();
+                if(err){
+                  $('.tweetContainer').remove();
+                  $('.endForm').remove();
+                  $('main').append('<section class="endForm"><p>An unexpected error occured. Please try again later.</p></section>');
+                }
               });
             }, 300);
           }
@@ -79,19 +84,16 @@ if (Meteor.isClient) {
           setTimeout(function(){
             $('.tweetContainer').remove();
           }, 200);
-          if(tweetAdded==5){
-            setTimeout(function(){
+          setTimeout(function(){
+            Meteor.call('addTweet', function(){
               $('.loadPhrase').remove();
-              $('main').append('<section class="endForm"><p>Sign up for more</p></section>');
-            }, 500);
-          } 
-          else {
-            setTimeout(function(){
-              Meteor.call('addTweet', function(){
-                $('.loadPhrase').remove();
-              });
-            }, 300);
-          }
+              if(err){
+                $('.tweetContainer').remove();
+                $('.endForm').remove();
+                $('main').append('<section class="endForm"><p>An unexpected error occured. Please try again later.</p></section>');
+              }
+            });
+          }, 300);
         }
       });
     });
@@ -131,7 +133,13 @@ if (Meteor.isClient) {
               tweetsData=data;
           }
           $('.loader').remove();
-          Meteor.call('addTweet');
+          Meteor.call('addTweet', function(err){
+            if(err){
+              $('.tweetContainer').remove();
+              $('.endForm').remove();
+              $('main').append('<section class="endForm"><p>An unexpected error occured. Please try again later.</p></section>');
+            }
+          });
           $('#hashtagHeader').val("");
           });
         }
@@ -154,7 +162,13 @@ if (Meteor.isClient) {
               tweetsData=data;
           }
           $('.loader').remove();
-          Meteor.call('addTweet');
+          Meteor.call('addTweet', function(err){
+            if(err){
+              $('.tweetContainer').remove();
+              $('.endForm').remove();
+              $('main').append('<section class="endForm"><p>An unexpected error occured. Please try again later.</p></section>');
+            }
+          });
           });
         }
       }
@@ -177,7 +191,13 @@ if (Meteor.isClient) {
               tweetsData=data;
           }
           $('.loader').remove();
-          Meteor.call('addTweet');
+          Meteor.call('addTweet', function(err){
+            if(err){
+              $('.endForm').remove();
+              $('.tweetContainer').remove();
+              $('main').append('<section class="endForm"><p>An unexpected error occured. Please try again later.</p></section>');
+            }
+          });
           });
         }
       }
@@ -277,7 +297,7 @@ if (Meteor.isServer) {
           hashtag = "#"+hashtag;
       }
       T.get('search/tweets', { q: hashtag, count: 50, result_type: "recent"}, function(err, data, response) {
-          fut.return(data);
+        fut.return(data);
       });
       return fut.wait();
     },
