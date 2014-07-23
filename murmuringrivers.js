@@ -4,6 +4,12 @@ if (Meteor.isClient) {
   tweetsData,
   tweet;
 
+  Template.layout.rendered= function(){
+    if($('.tweetContainer').length==0){
+      TweenMax.to($('header > h1 > a'), 0.2, {textAlign: 'center'});
+    }
+  }
+
   Template.layout.title = function(){
     var title = Session.get('hashtag');
     if(title!=="Try me like one of this french girls")
@@ -75,7 +81,6 @@ if (Meteor.isClient) {
         }
         else{
           TweenMax.to($('.tweetContainer'), 0.2, {opacity: 0});
-          TweenMax.to($('.tweetContainer'), 0.001, {opacity: 1, delay: 0.2});
           $('main').append('<p class="loadPhrase">#'+Session.get('hashtag')+' is coming</p>');
           setTimeout(function(){
             $('.tweetContainer').remove();
@@ -173,6 +178,7 @@ if (Meteor.isClient) {
           TweenMax.to($('.form'), 0.15, {scale: 0, transformOrigin: "center"});
           TweenMax.to($('.form'), 0.01, {scale: 1, transformOrigin: "center", display: "none", delay: 0.15});
           TweenMax.to($('.header-input'), 0.2, {right: '-250px'});
+          TweenMax.to($('header > h1 > a'), 0.2, {textAlign: 'left'});
           $('.form').after('<div class="loader"></div>');
           $('.tweetContainer').remove();
           Meteor.call('getTweet', Session.get("hashtag"), function(error, data){
@@ -200,8 +206,9 @@ if (Meteor.isClient) {
           Session.set("hashtag", $('#hashtag').val());
           document.getElementById('hashtagHeader').placeholder=$('#hashtag').val();
           TweenMax.to($('.form'), 0.15, {scale: 0, transformOrigin: "center"});
-          TweenMax.to($('.form'), 0.01, {scale: 1, transformOrigin: "center", display: "none", delay: 0.15});
+          TweenMax.to($('.form'), 0.01, {scale: 1, transformOrigin: "center", display: "none", delay: 0.15});  
           TweenMax.to($('.header-input'), 0.2, {right: '-250px'});
+          TweenMax.to($('header > h1 > a'), 0.2, {textAlign: 'left'});
           $('.form').after('<div class="loader"></div>');
           $('.tweetContainer').remove();
           Meteor.call('getTweet', Session.get("hashtag"), function(error, data){
@@ -289,7 +296,7 @@ if (Meteor.isClient) {
           username: tweetsData.statuses[tweetCount].user.name,
           profile_picture: tweetsData.statuses[tweetCount].user.profile_image_url,
           text: tweetsData.statuses[tweetCount].text,
-          date: moment().utc(tweetsData.statuses[tweetCount].created_at).format("hh:mm:ss dddd MMMM YYYY"),
+          date: moment().utc(tweetsData.statuses[tweetCount].created_at).format("hh:mm:ss - dddd MMMM YYYY"),
           // moment().utc(tweetsData.statuses[tweetCount].created_at)format("hh:mm:ss dddd MMMM YYYY")
       };
       $('main').append('<div class="tweetContainer"><div class="tweet"><div class="circular"><img src="'+tweet.profile_picture+'"></div><strong>'+tweet.username+'</strong><p class="text">'+tweet.text+'</p><p class="date">'+tweet.date+'</p></div><div class="btn-holder"><div class="btn" id="validate"><div class="sprite befAdd"></div><span>Add</span></div><div class="btn" id="delete"><div class="sprite befDel"></div><span>Delete</span></div></div></div>');
