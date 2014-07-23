@@ -24,6 +24,9 @@
 		<hr>
 		<main>
 			{{> yield}}
+			{{#if needSign}}
+			  {{> MailChimpListSubscribe}}
+			{{/if}}
 		</main>  
 	  <footer>
 	  	<a href="http://ramsey.io" target="_blank">

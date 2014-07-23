@@ -269,3 +269,40 @@ input[type=button]
 	p
 		font-size: 18px
 		text-align: center
+.subscribe
+	.message
+		color: #ffffff
+		text-align: center
+		margin: 20px auto
+	input
+		width: 80%
+		margin: auto
+		display: block
+		background: #32333a
+		border: 1px solid #ffa300
+		height: 30px
+		outline: none
+		color: #ffffff
+		padding: 0 10px
+		position: relative
+		z-index: 2
+		+border-radius(5px, 5px)
+	#subBtn
+		background: #ffffff
+		width: 80%
+		display: block
+		margin: 10px auto
+		padding: 0 10px
+		border: 2px solid #ffffff
+		line-height: 30px
+		color: #ffa300
+		border-radius: 5px
+		text-transform: uppercase
+		opacity: 0
+		position: relative
+		top: -35px
+		+transition(border, 350ms, ease)
+		&:hover
+			border: 2px solid #ffa300
+		&:focus, &:active
+			outline: none

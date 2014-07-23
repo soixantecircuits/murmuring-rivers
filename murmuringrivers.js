@@ -8,6 +8,10 @@ if (Meteor.isClient) {
     if($('.tweetContainer').length==0){
       TweenMax.to($('header > h1 > a'), 0.2, {textAlign: 'center'});
     }
+    Session.set('needSign', false);
+  }
+  Template.layout.needSign = function(){
+    return Session.get('needSign');
   }
 
   Template.layout.title = function(){
@@ -61,7 +65,7 @@ if (Meteor.isClient) {
           if(tweetAdded==5){
             setTimeout(function(){
               $('.loadPhrase').remove();
-              $('main').append('<section class="endForm"><p>Sign up for more</p></section>');
+              Session.set('needSign', true);
             }, 500);
           } else {
             setTimeout(function(){
