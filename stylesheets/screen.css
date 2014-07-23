@@ -86,15 +86,21 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 /* line 33, ../sass/screen.sass */
 html, body {
   height: 100%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-/* line 35, ../sass/screen.sass */
+/* line 36, ../sass/screen.sass */
 body {
   font-family: "Lato";
   background: #32333a;
 }
 
-/* line 38, ../sass/screen.sass */
+/* line 39, ../sass/screen.sass */
 .wrapper {
   min-height: 100%;
   position: relative;
@@ -102,24 +108,24 @@ body {
   overflow: hidden;
 }
 
-/* line 43, ../sass/screen.sass */
+/* line 44, ../sass/screen.sass */
 main {
   padding-bottom: 60px;
 }
 
-/* line 45, ../sass/screen.sass */
+/* line 46, ../sass/screen.sass */
 input, textarea {
   -webkit-appearance: none;
   -webkit-border-radius: 0;
 }
 
-/* line 49, ../sass/screen.sass */
+/* line 50, ../sass/screen.sass */
 header {
   height: 50px;
   margin-bottom: 20px;
   position: relative;
 }
-/* line 54, ../sass/screen.sass */
+/* line 55, ../sass/screen.sass */
 header h1 a, header h1 a:visited {
   line-height: 50px;
   color: #ffa300;
@@ -132,14 +138,14 @@ header h1 a, header h1 a:visited {
   width: 100%;
   text-align: center;
 }
-/* line 65, ../sass/screen.sass */
+/* line 66, ../sass/screen.sass */
 header .header-input {
   position: absolute;
   top: 5px;
   right: -300px;
   z-index: 2;
 }
-/* line 70, ../sass/screen.sass */
+/* line 71, ../sass/screen.sass */
 header .header-input .befHeaderText {
   height: 100%;
   width: 50px;
@@ -148,7 +154,7 @@ header .header-input .befHeaderText {
   top: 0;
   left: 0;
 }
-/* line 77, ../sass/screen.sass */
+/* line 78, ../sass/screen.sass */
 header .header-input .befHeaderText .befSprite {
   background-position: -313px -5px;
   height: 16px;
@@ -158,7 +164,7 @@ header .header-input .befHeaderText .befSprite {
   left: 20px;
 }
 
-/* line 84, ../sass/screen.sass */
+/* line 85, ../sass/screen.sass */
 hr {
   margin: 0;
   margin-top: -15px;
@@ -170,7 +176,7 @@ hr {
   border-bottom: 1px solid #3c3c44;
 }
 
-/* line 94, ../sass/screen.sass */
+/* line 95, ../sass/screen.sass */
 footer {
   height: 60px;
   text-align: center;
@@ -178,28 +184,28 @@ footer {
   bottom: 0;
   width: 100%;
 }
-/* line 100, ../sass/screen.sass */
+/* line 101, ../sass/screen.sass */
 footer img {
   line-height: 60px;
   vertical-align: middle;
   margin-right: 15px;
 }
-/* line 104, ../sass/screen.sass */
+/* line 105, ../sass/screen.sass */
 footer a, footer a:visited {
   font-weight: 700;
   line-height: 50px;
   color: #7676c9;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
-/* line 109, ../sass/screen.sass */
+/* line 110, ../sass/screen.sass */
 .form {
   margin: 80px auto 20px;
   width: 100%;
   text-align: center;
 }
 
-/* line 113, ../sass/screen.sass */
+/* line 114, ../sass/screen.sass */
 .input-container {
   width: 200px;
   height: 45px;
@@ -208,8 +214,8 @@ footer a, footer a:visited {
   margin-right: -4px;
   vertical-align: top;
 }
-/* line 120, ../sass/screen.sass */
-.input-container input[type=number], .input-container input[type=text] {
+/* line 121, ../sass/screen.sass */
+.input-container input[type=number], .input-container input[type=tel], .input-container input[type=text] {
   height: 45px;
   width: 140px;
   background: whitesmoke;
@@ -220,35 +226,35 @@ footer a, footer a:visited {
   color: #919191;
   font-weight: 700;
 }
-/* line 130, ../sass/screen.sass */
-.input-container input[type=number]::-webkit-input-placeholder, .input-container input[type=text]::-webkit-input-placeholder {
+/* line 131, ../sass/screen.sass */
+.input-container input[type=number]::-webkit-input-placeholder, .input-container input[type=tel]::-webkit-input-placeholder, .input-container input[type=text]::-webkit-input-placeholder {
   font-weight: 700;
   color: #919191;
 }
-/* line 133, ../sass/screen.sass */
-.input-container input[type=number]:-moz-placeholder, .input-container input[type=text]:-moz-placeholder {
+/* line 134, ../sass/screen.sass */
+.input-container input[type=number]:-moz-placeholder, .input-container input[type=tel]:-moz-placeholder, .input-container input[type=text]:-moz-placeholder {
   font-weight: 700;
   color: #919191;
 }
-/* line 136, ../sass/screen.sass */
-.input-container input[type=number]::-moz-placeholder, .input-container input[type=text]::-moz-placeholder {
+/* line 137, ../sass/screen.sass */
+.input-container input[type=number]::-moz-placeholder, .input-container input[type=tel]::-moz-placeholder, .input-container input[type=text]::-moz-placeholder {
   font-weight: 700;
   color: #919191;
 }
-/* line 139, ../sass/screen.sass */
-.input-container input[type=number]:-ms-input-placeholder, .input-container input[type=text]:-ms-input-placeholder {
+/* line 140, ../sass/screen.sass */
+.input-container input[type=number]:-ms-input-placeholder, .input-container input[type=tel]:-ms-input-placeholder, .input-container input[type=text]:-ms-input-placeholder {
   font-weight: 700;
   color: #919191;
 }
-/* line 142, ../sass/screen.sass */
-.input-container input[type=number]:focus, .input-container input[type=text]:focus {
+/* line 143, ../sass/screen.sass */
+.input-container input[type=number]:focus, .input-container input[type=tel]:focus, .input-container input[type=text]:focus {
   outline: none;
 }
-/* line 144, ../sass/screen.sass */
-.input-container input[type=number]:active, .input-container input[type=text]:active {
+/* line 145, ../sass/screen.sass */
+.input-container input[type=number]:active, .input-container input[type=tel]:active, .input-container input[type=text]:active {
   border: none;
 }
-/* line 146, ../sass/screen.sass */
+/* line 147, ../sass/screen.sass */
 .input-container .befPin {
   background-position: -369px -5px;
   width: 16px;
@@ -257,7 +263,7 @@ footer a, footer a:visited {
   top: 12px;
   left: 20px;
 }
-/* line 153, ../sass/screen.sass */
+/* line 154, ../sass/screen.sass */
 .input-container .befHashtag {
   background-position: -257px -5px;
   width: 12px;
@@ -267,7 +273,7 @@ footer a, footer a:visited {
   left: 20px;
 }
 
-/* line 161, ../sass/screen.sass */
+/* line 162, ../sass/screen.sass */
 input[type=button] {
   display: inline-block;
   height: 45px;
@@ -293,18 +299,18 @@ input[type=button] {
   -o-transition-timing-function: ease;
   transition-timing-function: ease;
 }
-/* line 174, ../sass/screen.sass */
+/* line 175, ../sass/screen.sass */
 input[type=button]:focus {
   outline: none;
 }
-/* line 176, ../sass/screen.sass */
+/* line 177, ../sass/screen.sass */
 input[type=button]:active {
   border: none;
   outline: none;
   background: #f59c00;
 }
 
-/* line 180, ../sass/screen.sass */
+/* line 181, ../sass/screen.sass */
 .loadPhrase {
   display: inline-block;
   position: absolute;
@@ -315,7 +321,7 @@ input[type=button]:active {
   color: whitesmoke;
 }
 
-/* line 188, ../sass/screen.sass */
+/* line 189, ../sass/screen.sass */
 .tweetContainer {
   width: 100%;
   height: 320px;
@@ -323,12 +329,12 @@ input[type=button]:active {
   background: whitesmoke;
   position: relative;
 }
-/* line 194, ../sass/screen.sass */
+/* line 195, ../sass/screen.sass */
 .tweetContainer .tweet {
   position: relative;
   padding: 15px;
 }
-/* line 197, ../sass/screen.sass */
+/* line 198, ../sass/screen.sass */
 .tweetContainer .tweet .circular {
   height: 48px;
   width: 48px;
@@ -339,30 +345,30 @@ input[type=button]:active {
   border-radius: 50% / 50%;
   vertical-align: middle;
 }
-/* line 204, ../sass/screen.sass */
+/* line 205, ../sass/screen.sass */
 .tweetContainer .tweet strong {
   font-size: 20px;
   margin-left: 15px;
 }
-/* line 207, ../sass/screen.sass */
+/* line 208, ../sass/screen.sass */
 .tweetContainer .tweet .text {
   margin: 20px 0 15px;
   color: #777777;
 }
-/* line 210, ../sass/screen.sass */
+/* line 211, ../sass/screen.sass */
 .tweetContainer .tweet .date {
   font-size: 12px;
   color: #32333a;
   font-weight: 400;
 }
-/* line 214, ../sass/screen.sass */
+/* line 215, ../sass/screen.sass */
 .tweetContainer .btn-holder {
   height: 50px;
   position: absolute;
   width: 100%;
   bottom: 0;
 }
-/* line 219, ../sass/screen.sass */
+/* line 220, ../sass/screen.sass */
 .tweetContainer .btn-holder .btn {
   cursor: pointer;
   text-align: center;
@@ -376,20 +382,20 @@ input[type=button]:active {
   font-weight: 700;
   position: relative;
 }
-/* line 231, ../sass/screen.sass */
+/* line 232, ../sass/screen.sass */
 .tweetContainer .btn-holder .btn:hover {
   background: #d5d5d5;
 }
-/* line 233, ../sass/screen.sass */
+/* line 234, ../sass/screen.sass */
 .tweetContainer .btn-holder .btn span {
   margin-left: 30px;
 }
-/* line 235, ../sass/screen.sass */
+/* line 236, ../sass/screen.sass */
 .tweetContainer .btn-holder #validate {
   margin-right: -6px;
   border-right: 2px solid whitesmoke;
 }
-/* line 238, ../sass/screen.sass */
+/* line 239, ../sass/screen.sass */
 .tweetContainer .btn-holder #validate .befAdd {
   background-position: -5px -5px;
   height: 22px;
@@ -398,13 +404,13 @@ input[type=button]:active {
   top: 14px;
   left: 40px;
 }
-/* line 245, ../sass/screen.sass */
+/* line 246, ../sass/screen.sass */
 .tweetContainer .btn-holder #delete {
   margin-left: -2px;
   border-left: 2px solid whitesmoke;
   padding-right: 4px;
 }
-/* line 249, ../sass/screen.sass */
+/* line 250, ../sass/screen.sass */
 .tweetContainer .btn-holder #delete .befDel {
   background-position: -171px -5px;
   height: 22px;
@@ -414,19 +420,19 @@ input[type=button]:active {
   left: 40px;
 }
 
-/* line 256, ../sass/screen.sass */
+/* line 257, ../sass/screen.sass */
 #state {
   color: whitesmoke;
   margin-top: 30px;
 }
 
-/* line 259, ../sass/screen.sass */
+/* line 260, ../sass/screen.sass */
 .endForm {
   width: 100%;
   color: whitesmoke;
   padding: 15px;
 }
-/* line 263, ../sass/screen.sass */
+/* line 264, ../sass/screen.sass */
 .endForm p {
   font-size: 18px;
   text-align: center;

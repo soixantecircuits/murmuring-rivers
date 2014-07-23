@@ -74,7 +74,8 @@ if (Meteor.isClient) {
           Router.go('hello');
         }
         else{
-          TweenMax.to($('.tweetContainer'), 0.2, {top: "-400px"});
+          TweenMax.to($('.tweetContainer'), 0.2, {opacity: 0});
+          TweenMax.to($('.tweetContainer'), 0.001, {opacity: 1, delay: 0.2});
           $('main').append('<p class="loadPhrase">#'+Session.get('hashtag')+' is coming</p>');
           setTimeout(function(){
             $('.tweetContainer').remove();
@@ -288,13 +289,12 @@ if (Meteor.isClient) {
           username: tweetsData.statuses[tweetCount].user.name,
           profile_picture: tweetsData.statuses[tweetCount].user.profile_image_url,
           text: tweetsData.statuses[tweetCount].text,
-          date: tweetsData.statuses[tweetCount].created_at
+          date: moment().utc(tweetsData.statuses[tweetCount].created_at).format("hh:mm:ss dddd MMMM YYYY"),
+          // moment().utc(tweetsData.statuses[tweetCount].created_at)format("hh:mm:ss dddd MMMM YYYY")
       };
       $('main').append('<div class="tweetContainer"><div class="tweet"><div class="circular"><img src="'+tweet.profile_picture+'"></div><strong>'+tweet.username+'</strong><p class="text">'+tweet.text+'</p><p class="date">'+tweet.date+'</p></div><div class="btn-holder"><div class="btn" id="validate"><div class="sprite befAdd"></div><span>Add</span></div><div class="btn" id="delete"><div class="sprite befDel"></div><span>Delete</span></div></div></div>');
-            TweenMax.to($('.tweet'), 0.01, {left: "400px", opacity: 1});
-            TweenMax.to($('.btn-holder'), 0.01, {left: "400px", opacity: 1});
-            TweenMax.to($('.tweet'), 0.4, {left: 0});
-            TweenMax.to($('.btn-holder'), 0.4, {left: 0});
+            TweenMax.to($('.tweetContainer'), 0.01, {left: "400px", opacity: 1});
+            TweenMax.to($('.tweetContainer'), 0.4, {left: 0});
       tweetCount++;
     }
   });
