@@ -1,0 +1,6 @@
+{
+    "MailChimpOptions": {
+        "apiKey": "<Your MailChimp API Key>",
+        "listId": "<ID of your default mailing list>"
+    }
+}

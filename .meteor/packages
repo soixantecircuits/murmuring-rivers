@@ -7,7 +7,7 @@ standard-app-packages
 autopublish
 insecure
 iron-router
-npm
-firebase-custom
 moment
 mailchimp
+npm
+firebase-custom

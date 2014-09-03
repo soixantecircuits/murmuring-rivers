@@ -1,8 +1,12 @@
 {
   "packages": {
-    "iron-router": {},
-    "npm": {},
+    "iron-router":{
+      "git":"https://github.com/EventedMind/iron-router.git",
+      "tag": "v0.8.1",
+      "commit": "05415a8891ea87a00fb1e2388585f2ca5a38e0da"
+    },
     "moment": {},
-    "mailchimp": {}
+    "mailchimp": {},
+    "npm": {}
   }
 }

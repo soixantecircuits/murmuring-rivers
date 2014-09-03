@@ -10,19 +10,17 @@ if (Meteor.isClient) {
     }
     Session.set('needSign', false);
   }
-  Template.layout.needSign = function(){
-    return Session.get('needSign');
-  }
-
-  Template.layout.title = function(){
-    var title = Session.get('hashtag');
-    if(title!=="Try me like one of this french girls")
-      title = "#"+title;
-    return title;
-  }
-  Template.search.pin = function(){
-    return Router.current().data().pin;
-  }
+  Template.layout.helpers({
+    needSign: function(){
+      return Session.get('needSign');
+    },
+    title: function(){
+      var title = Session.get('hashtag');
+      if(title!=="Try me like one of this french girls")
+        title = "#"+title;
+      return title;
+    }
+  });
   Template.search.rendered = function(){
     $('endForm').remove();
     var pin = Session.get('pin');
@@ -98,20 +96,26 @@ if (Meteor.isClient) {
       });
     });
     $(document).on('click', '.befHeaderText', function(){
-      if($('header').css("left")!="-250px")
+      if($('header').css("left")!="-250px"){
         TweenMax.to($('header'), 0.5, {left: "-250px"});
+        $('#hashtagHeader').blur();
+      }
       else
         TweenMax.to($('header'), 0.5, {left: 0});
     });
     $(document).on('touchmove', '.befHeaderText', function(){
-      if($('header').css("left")!="-250px")
+      if($('header').css("left")!="-250px"){
         TweenMax.to($('header'), 0.5, {left: "-250px"});
+        $('#hashtagHeader').blur();        
+      }
       else
         TweenMax.to($('header'), 0.5, {left: 0});
     });
     $(document).on('touchstart', '.befHeaderText', function(){
-      if($('header').css("left")!="-250px")
+      if($('header').css("left")!="-250px"){
         TweenMax.to($('header'), 0.5, {left: "-250px"});
+        $('#hashtagHeader').blur();
+      }
       else
         TweenMax.to($('header'), 0.5, {left: 0});
     });
@@ -235,6 +239,11 @@ if (Meteor.isClient) {
       }
     });
   }
+  Template.search.helpers({
+    pin: function(){
+      return Router.current().data().pin;
+    },
+  });
   Template.hello.rendered = function(){
     delete Session.keys['pin'];
     Session.set('hashtag', "Try me like one of this french girls");
