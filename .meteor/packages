@@ -8,6 +8,6 @@ autopublish
 insecure
 iron-router
 moment
-mailchimp
 npm
 firebase-custom
+mailchimp

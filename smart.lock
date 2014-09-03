@@ -7,7 +7,10 @@
         "tag": "v0.8.1"
       },
       "moment": {},
-      "mailchimp": {},
+      "mailchimp": {
+        "git": "https://github.com/soixantecircuits/meteor-mailchimp",
+        "branch": "riverflow"
+      },
       "npm": {}
     },
     "packages": {
@@ -22,9 +25,9 @@
         "commit": "722ea63783d594341023836b7d418ab2567dab8c"
       },
       "mailchimp": {
-        "git": "https://github.com/MiroHibler/meteor-mailchimp.git",
-        "tag": "v0.4.2",
-        "commit": "7d100e96b37eb931f4e1d9544da677bb43fe8b5b"
+        "git": "https://github.com/soixantecircuits/meteor-mailchimp",
+        "branch": "riverflow",
+        "commit": "bef07ed683533a90b20e2f13ff04f554cb70b255"
       },
       "npm": {
         "git": "https://github.com/arunoda/meteor-npm.git",

@@ -97,53 +97,27 @@ if (Meteor.isClient) {
     });
     $(document).on('click', '.befHeaderText', function(){
       if($('header').css("left")!="-250px"){
-        TweenMax.to($('header'), 0.5, {left: "-250px"});
-        $('#hashtagHeader').blur();
+        hideHeader();
       }
       else
         TweenMax.to($('header'), 0.5, {left: 0});
     });
     $(document).on('touchmove', '.befHeaderText', function(){
       if($('header').css("left")!="-250px"){
-        TweenMax.to($('header'), 0.5, {left: "-250px"});
-        $('#hashtagHeader').blur();        
+        hideHeader();   
       }
       else
         TweenMax.to($('header'), 0.5, {left: 0});
     });
     $(document).on('touchstart', '.befHeaderText', function(){
       if($('header').css("left")!="-250px"){
-        TweenMax.to($('header'), 0.5, {left: "-250px"});
-        $('#hashtagHeader').blur();
+        hideHeader();
       }
       else
         TweenMax.to($('header'), 0.5, {left: 0});
     });
     $(document).on('click', '#newHeaderTweet', function(){
-      TweenMax.to($('header'), 0.5, {left: 0});
-      if($('#hashtagHeader').val()!=='' && tweetCount<5){
-        if(tweetCount==0 || Session.get("hashtag")!==$('#hashtagHeader').val()){
-          document.getElementById('hashtagHeader').placeholder=$('#hashtagHeader').val();
-          Session.set("hashtag", $('#hashtagHeader').val());
-          TweenMax.to($('.form'), 0.15, {scale: 0, transformOrigin: "center"});
-          TweenMax.to($('.form'), 0.01, {scale: 1, transformOrigin: "center", display: "none", delay: 0.15});
-          TweenMax.to($('.header-input'), 0.2, {right: '-250px'});
-          $('.endForm').remove();
-          $('.form').after('<div class="loader"></div>');
-          $('.tweetContainer').remove();
-          Meteor.call('getTweet', Session.get("hashtag"), function(error, data){
-            if(error)
-              console.log(error);
-            else{
-              tweetsData=data;
-            }
-            $('.loader').remove();
-            Meteor.call('addTweet', function(err){
-            });
-            $('#hashtagHeader').val("");
-          });
-        }
-      }
+      newHashtag();
     });
     $(document).on( "keypress", '#hashtagHeader', function(evt){
       if (evt.keyCode === 13) {
